@@ -45,6 +45,9 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Fichiers sources\StateEngine</Filter>
     </ClCompile>
+    <ClCompile Include="FileController.cpp">
+      <Filter>Fichiers sources\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundController.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Fichiers d%27en-tête\StateEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="FileController.h">
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

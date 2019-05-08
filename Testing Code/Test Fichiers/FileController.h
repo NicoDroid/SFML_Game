@@ -2,15 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <vector>
 
 class FileOptionController
 {
 private:
 
 public:
-	static int RecupOptions();
 
-	static void SetVolumeMenu();
-	static void SetVolumeGame();
+	FileOptionController();
+	~FileOptionController();
+
+
+
+
+	static std::vector<int> RecupFileOption();
+	static void SetFileOption(int VolumeMenu, int VolumeGame);
 };
 

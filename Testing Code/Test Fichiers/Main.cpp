@@ -23,10 +23,11 @@ int main()
 	text.setCharacterSize(18);
 	text.setFillColor(sf::Color::Red);
 
-	FileOptionController::SetVolumeMenu();
-	FileOptionController::SetVolumeGame();
+	//FileOptionController::SetFileOption(10,20);
 
-	FileOptionController::RecupOptions();
+	vector<int> Config;
+	Config= FileOptionController::RecupFileOption();
+	cout << Config[1];
 
 	while (window.isOpen())
 	{

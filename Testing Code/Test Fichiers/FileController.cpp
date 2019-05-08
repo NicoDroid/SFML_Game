@@ -1,36 +1,63 @@
 #include "FileController.h"
 #include <iostream>
 
-int FileOptionController::RecupOptions()
+
+
+FileOptionController::FileOptionController()
 {
-	int valeur[2];
+
+}
+
+
+
+
+
+
+
+
+
+
+
+std::vector<int> FileOptionController::RecupFileOption()
+{
+	std::vector<int> tabvaleurs;
+	int valeur;
 
 	FILE *m_file;
-	fopen_s(&m_file, "Test.txt", "r");
+
+	fopen_s(&m_file, "OptionsParam.ini", "r");
 
 	for (int i = 0; i < 2; i++)
 	{
-		fscanf_s(m_file, "%d %d", &valeur[0], &valeur[1]);
-		std::cout << valeur[1] << std::endl;
+		fscanf_s(m_file, "%*s %d", &valeur);
+		tabvaleurs.push_back(valeur);
 	}
-		fclose(m_file);
-		return 0;
-}
 
-void FileOptionController::SetVolumeMenu()
-{
-	FILE *m_file;
-	fopen_s(&m_file,"Test.txt", "a");
-	fputs("0 10", m_file);
-	fputs("\n", m_file);
 	fclose(m_file);
+
+	return tabvaleurs;
 }
 
-void FileOptionController::SetVolumeGame()
+void FileOptionController::SetFileOption(int VolumeMenu,int VolumeGame)
 {
 	FILE *m_file;
-	fopen_s(&m_file, "Test.txt", "a");
-	fputs("1 20", m_file);
-	fputs("\n", m_file);
+	fopen_s(&m_file, "OptionsParam.ini", "a");
+
+	std::string chemin[] = { "VolumeMenu " ,"VolumeGame "};
+	int param[] = { VolumeMenu,VolumeGame };
+
+	for (int i = 0; i < 2; i++)
+	{
+		chemin[i] += std::to_string(param[i]);
+
+		//Conversion du String en pointeur de Char
+		char *char_chemin;
+		char_chemin = (char*)chemin[i].c_str();
+
+		//Insertion dans le fichier
+		fputs(char_chemin, m_file);
+		fputs("\n", m_file);
+	}
+
 	fclose(m_file);
 }
