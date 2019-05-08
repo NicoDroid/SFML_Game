@@ -1,0 +1,8 @@
+Fichiers à ajouter dans l'exe:
+								- openal32.dll
+								- OptionsParam.ini
+								
+Fonctionnalitées OK:
+						- StatesManager
+						- SoundController
+						- FileController
