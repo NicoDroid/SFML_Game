@@ -1,0 +1,7 @@
+﻿  FileController.cpp
+d:\users\uncreativedroid\desktop\projet sfml 2.5.11\filecontroller.cpp(14): warning C4477: 'fscanf_s' : la chaîne de format '%s' nécessite un argument de type 'unsigned int', mais l'argument variadique 2 est de type 'int *'
+  d:\users\uncreativedroid\desktop\projet sfml 2.5.11\filecontroller.cpp(14): note: cet argument est utilisé comme taille de mémoire tampon
+d:\users\uncreativedroid\desktop\projet sfml 2.5.11\filecontroller.cpp(14): warning C4473: 'fscanf_s' : nombre insuffisant d'arguments passés pour la chaîne de format
+  d:\users\uncreativedroid\desktop\projet sfml 2.5.11\filecontroller.cpp(14): note: les espaces réservés et leurs paramètres attendent des arguments 3 variadiques, mais des arguments 2 ont été fournis
+  d:\users\uncreativedroid\desktop\projet sfml 2.5.11\filecontroller.cpp(14): note: l'argument variadique manquant 3 est demandé par la chaîne de format '%d'
+  Projet SFML 2.5.11.vcxproj -> D:\Users\UnCreativeDroid\Desktop\Projet SFML 2.5.11\Debug\Projet SFML 2.5.11.exe
