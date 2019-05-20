@@ -75,7 +75,7 @@
     <ClCompile Include="Infanterie.cpp">
       <Filter>Fichiers sources\Entite\Mobile</Filter>
     </ClCompile>
-    <ClCompile Include="IA_Controller.cpp">
+    <ClCompile Include="EventController.cpp">
       <Filter>Fichiers sources\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,7 +116,7 @@
     <ClInclude Include="Infanterie.h">
       <Filter>Fichiers d%27en-tête\Entite\Mobile</Filter>
     </ClInclude>
-    <ClInclude Include="IA_Controller.h">
+    <ClInclude Include="EventController.h">
       <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
   </ItemGroup>

@@ -127,9 +127,9 @@
   <ItemGroup>
     <ClCompile Include="Entite.cpp" />
     <ClCompile Include="Entite_mobile.cpp" />
+    <ClCompile Include="EventController.cpp" />
     <ClCompile Include="FileController.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="IA_Controller.cpp" />
     <ClCompile Include="Infanterie.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapEngineController.cpp" />
@@ -142,10 +142,10 @@
   <ItemGroup>
     <ClInclude Include="Entite.h" />
     <ClInclude Include="Entite_mobile.h" />
+    <ClInclude Include="EventController.h" />
     <ClInclude Include="FileController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="IA_Controller.h" />
     <ClInclude Include="Infanterie.h" />
     <ClInclude Include="MapEngineController.h" />
     <ClInclude Include="MenuState.h" />

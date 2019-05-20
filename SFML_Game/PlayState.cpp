@@ -5,7 +5,7 @@
 #include "PlayState.h"
 #include "MenuState.h"
 #include "GameState.h"
-#include "IA_Controller.h"
+#include "EventController.h"
 
 const int level[] =
 {
@@ -35,7 +35,11 @@ PlayState::PlayState(Game* game)
 	this->game = game;
 
 	avion = new vector<Entite*>;
-	
+
+	/*
+	avion[0] = new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64));
+	avion->setPosition(sf::Vector2f(0, 672));*/
+
 	// on charge la texture du tileset
 	if (!texture_map.loadFromFile("Ressources/Tiled/Tilesheet.png"))
 	{
@@ -43,57 +47,40 @@ PlayState::PlayState(Game* game)
 	}
 	map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
 
-	test = new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64));
-
-	//avion = new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64));
-	for (int i = 0; i < avion->size(); i++)
-	{
-		avion->at(i)->setPosition(sf::Vector2f(0+(i*10), 672));
-	}
-	
 	/*
 	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
 	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
 	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
 	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
 	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
-	
-
-	for (int i = 0; i < avion.size(); i++)
-	{
-		avion[i]->setPosition(sf::Vector2f(0 + (i * 10), 672));
-	}*/
+	*/
 }
 
 void PlayState::draw(const float dt)
 {
-	
-
 	game->window.draw(map_one);
-	
+
 	for (int i = 0; i < avion->size(); i++)
 	{
 		game->window.draw(avion->at(i)->sprite);
 	}
-
-	//game->window.draw(avion->sprite);
+	
 }
 
 void PlayState::update(const float dt)
 {
+
 	if (clock.getElapsedTime().asSeconds() > 2.0f) {
-		avion->push_back(test);
+		avion->push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
 		clock.restart();
 	}
 
 	for (int i = 0; i < avion->size(); i++)
 	{
-		avion->at(i)->setPosition(sf::Vector2f(0 + (i * 10), 672));
+		avion->at(i)->road();
+		EventController::EventDestroyEntite(avion);
 	}
-
-	IA_Controller::road(avion);
-
-	//IA_Controller::road(avion);
+	
 }
 void PlayState::handleInput()
 {

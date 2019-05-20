@@ -1,15 +1,19 @@
-﻿  PlayState.cpp
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(49): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(51): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+﻿  Infanterie.cpp
+d:\users\nicolas\documents\github\sfml_game\sfml_game\infanterie.cpp(16): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  MenuState.cpp
+d:\users\nicolas\documents\github\sfml_game\sfml_game\menustate.cpp(17): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
           with
           [
-              T=float
+              T=unsigned int
           ]
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(74): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(89): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(91): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+d:\users\nicolas\documents\github\sfml_game\sfml_game\menustate.cpp(18): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
           with
           [
-              T=float
+              T=unsigned int
           ]
+  PlayState.cpp
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(63): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(78): warning C4018: '<' : incompatibilité signed/unsigned
+  Unites.cpp
+  Génération de code en cours...
   SFML_Game.vcxproj -> D:\Users\Nicolas\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe

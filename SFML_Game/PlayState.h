@@ -3,23 +3,25 @@
 #define GAME_STATE_EDITOR_HPP
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "GameState.h"
 #include "MapEngineController.h"
 #include "Entite.h"
 #include "Infanterie.h"
-#include <vector>
+
 
 class PlayState : public GameState
 {
 private:
 	void PauseGame();
 
+	int test = 0;
+
 	MapEngineController map_one;
 	sf::Texture texture_map;
-	std::vector<Entite*> *avion;
-	Entite *test;
-	//Entite *avion;
 	sf::Clock clock;
+
+	std::vector<Entite*> *avion;
 
 public:
 

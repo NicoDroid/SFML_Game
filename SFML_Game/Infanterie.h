@@ -8,5 +8,7 @@ public:
 	~Infanterie();
 
 	void rotation(int v_rotation);
+
+	void road();
 };
 

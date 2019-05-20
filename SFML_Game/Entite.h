@@ -19,5 +19,6 @@ public:
 
 	virtual void setMouvement(int v_mouvement) {};
 	virtual int getMouvement() { return 0; };
+	virtual void road() {};
 };
 

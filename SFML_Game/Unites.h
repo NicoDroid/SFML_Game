@@ -10,5 +10,6 @@ public:
 
 	void deplacement();
 	void setMouvement(int v_mouvement);
+	virtual int getMouvement();
 };
 

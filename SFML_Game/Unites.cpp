@@ -38,3 +38,8 @@ void Unites::setMouvement(int v_mouvement)
 {
 	this->mouvement = v_mouvement;
 }
+
+int Unites::getMouvement()
+{
+	return this->mouvement;
+}
