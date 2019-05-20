@@ -4,6 +4,7 @@
 #include "game.h"
 #include "MenuState.h"
 #include "SoundController.h"
+#include "FileController.h"
 
 
 int main()
@@ -11,13 +12,12 @@ int main()
 	Game game;
 
 	SoundController soundfond("speck.ogg", true);
+	soundfond.SetVolume(FileController::RecupFileOption()[0]);
 	soundfond.Play();
 
 	game.pushState(new MenuState(&game, &soundfond));
 
 	game.gameLoop();
-
-
 
 	return 0;
 }

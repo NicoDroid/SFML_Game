@@ -36,8 +36,6 @@ MenuState::MenuState(Game* game, SoundController* soundfond)
 	text[2].setFillColor(sf::Color::White);
 	text[2].setString("Exit");
 	text[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 3));
-
-	selectedItemIndex = 0;
 }
 
 void MenuState::handleInput()

@@ -11,11 +11,13 @@
 class MenuState :public GameState
 {
 private:
+	void MoveUp();
+	void MoveDown();
 
 	void loadgame();
 	void loadoptions();
 
-	int selectedItemIndex;
+	int selectedItemIndex = 0;
 	sf::Font font;
 	sf::Text text[MAX_NUMBER_OF_ITEMS_MENU];
 
@@ -28,9 +30,6 @@ public:
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
 	virtual void handleInput();
-
-	void MoveUp();
-	void MoveDown();
 };
 
 
