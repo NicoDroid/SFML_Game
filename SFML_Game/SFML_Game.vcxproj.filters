@@ -48,6 +48,9 @@
     <ClCompile Include="FileController.cpp">
       <Filter>Fichiers sources\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="MapEngineController.cpp">
+      <Filter>Fichiers sources\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundController.h">
@@ -69,6 +72,9 @@
       <Filter>Fichiers d%27en-tête\StateEngine</Filter>
     </ClInclude>
     <ClInclude Include="FileController.h">
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEngineController.h">
       <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
   </ItemGroup>
