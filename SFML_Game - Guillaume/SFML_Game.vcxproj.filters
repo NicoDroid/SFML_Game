@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Controller">
+      <UniqueIdentifier>{ada31ec8-01a6-4046-a13f-d65e938b03f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\StateEngine">
+      <UniqueIdentifier>{c33ab456-edc8-42b5-8ae2-7f7aee904775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Controller">
+      <UniqueIdentifier>{14170438-6f33-4d1a-bfe6-f7b036e2696f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\StateEngine">
+      <UniqueIdentifier>{d348a893-f145-4979-aec1-f468f381c58e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundController.cpp">
+      <Filter>Fichiers sources\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Fichiers sources\StateEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Fichiers sources\StateEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionState.cpp">
+      <Filter>Fichiers sources\StateEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Fichiers sources\StateEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="FileController.cpp">
+      <Filter>Fichiers sources\Controller</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SoundController.h">
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Fichiers d%27en-tête\StateEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Fichiers d%27en-tête\StateEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionState.h">
+      <Filter>Fichiers d%27en-tête\StateEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayState.h">
+      <Filter>Fichiers d%27en-tête\StateEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Fichiers d%27en-tête\StateEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="FileController.h">
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
