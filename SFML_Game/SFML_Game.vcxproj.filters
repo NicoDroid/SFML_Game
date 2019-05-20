@@ -25,6 +25,18 @@
     <Filter Include="Fichiers sources\StateEngine">
       <UniqueIdentifier>{d348a893-f145-4979-aec1-f468f381c58e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entite">
+      <UniqueIdentifier>{cc663bee-6a4b-4fce-b3c2-cf0e247b85c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entite">
+      <UniqueIdentifier>{b05f9e50-f6da-4f9b-bab7-87311d05d244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entite\Mobile">
+      <UniqueIdentifier>{f5a61472-510a-4c9e-b7f6-52cc5e711c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entite\Mobile">
+      <UniqueIdentifier>{4f7875c3-ebda-443e-abcf-8907e3b2e003}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -51,6 +63,21 @@
     <ClCompile Include="MapEngineController.cpp">
       <Filter>Fichiers sources\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="Entite.cpp">
+      <Filter>Fichiers sources\Entite</Filter>
+    </ClCompile>
+    <ClCompile Include="Entite_mobile.cpp">
+      <Filter>Fichiers sources\Entite\Mobile</Filter>
+    </ClCompile>
+    <ClCompile Include="Unites.cpp">
+      <Filter>Fichiers sources\Entite\Mobile</Filter>
+    </ClCompile>
+    <ClCompile Include="Infanterie.cpp">
+      <Filter>Fichiers sources\Entite\Mobile</Filter>
+    </ClCompile>
+    <ClCompile Include="IA_Controller.cpp">
+      <Filter>Fichiers sources\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundController.h">
@@ -75,6 +102,21 @@
       <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
     <ClInclude Include="MapEngineController.h">
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Entite.h">
+      <Filter>Fichiers d%27en-tête\Entite</Filter>
+    </ClInclude>
+    <ClInclude Include="Entite_mobile.h">
+      <Filter>Fichiers d%27en-tête\Entite\Mobile</Filter>
+    </ClInclude>
+    <ClInclude Include="Unites.h">
+      <Filter>Fichiers d%27en-tête\Entite\Mobile</Filter>
+    </ClInclude>
+    <ClInclude Include="Infanterie.h">
+      <Filter>Fichiers d%27en-tête\Entite\Mobile</Filter>
+    </ClInclude>
+    <ClInclude Include="IA_Controller.h">
       <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
   </ItemGroup>

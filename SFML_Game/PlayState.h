@@ -5,17 +5,22 @@
 #include <SFML/Graphics.hpp>
 #include "GameState.h"
 #include "MapEngineController.h"
-
+#include "Entite.h"
+#include "Infanterie.h"
+#include <vector>
 
 class PlayState : public GameState
 {
 private:
 	void PauseGame();
-	sf::Sprite sprite;
-	// on crée la tilemap avec le niveau précédemment défini
-	MapEngineController map;
-	sf::Texture texture;
-	int status = 0;
+
+	MapEngineController map_one;
+	sf::Texture texture_map;
+	std::vector<Entite*> *avion;
+	Entite *test;
+	//Entite *avion;
+	sf::Clock clock;
+
 public:
 
 	PlayState(Game* game);
