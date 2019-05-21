@@ -5,6 +5,7 @@
 #include "PlayState.h"
 #include "MenuState.h"
 #include "GameState.h"
+#include "EventController.h"
 
 const int level[] =
 {
@@ -33,79 +34,54 @@ PlayState::PlayState(Game* game)
 {
 	this->game = game;
 
+	avion = new vector<Entite*>;
+
+	/*
+	avion[0] = new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64));
+	avion->setPosition(sf::Vector2f(0, 672));*/
+
 	// on charge la texture du tileset
-	if (!texture.loadFromFile("Ressources/Tiled/Tilesheet.png"))
+	if (!texture_map.loadFromFile("Ressources/Tiled/Tilesheet.png"))
 	{
 		//handle error
 	}
+	map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
 
-	map.load(texture, sf::Vector2u(64, 64), level, 30, 17);
-
-	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(1152, 704, 64, 64));
-	sprite.setOrigin(32, 32);
-	sprite.setPosition(0, 672);
-	
+	/*
+	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+	*/
 }
 
 void PlayState::draw(const float dt)
 {
-	game->window.draw(map);
-	game->window.draw(sprite);
+	game->window.draw(map_one);
+
+	for (int i = 0; i < avion->size(); i++)
+	{
+		game->window.draw(avion->at(i)->sprite);
+	}
+	
 }
 
 void PlayState::update(const float dt)
 {
+
+	if (clock.getElapsedTime().asSeconds() > 2.0f) {
+		avion->push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+		clock.restart();
+	}
+
+	for (int i = 0; i < avion->size(); i++)
+	{
+		avion->at(i)->road();
+		EventController::EventDestroyEntite(avion);
+	}
 	
-	if (sprite.getPosition().x == 0 && sprite.getPosition().y==672)
-	{
-		status = 1;
-	}else if(sprite.getPosition().x == 670 && sprite.getPosition().y == 672)
-	{
-		sprite.rotate(-90);		
-		status = 2;
-		
-	}else if (sprite.getPosition().x == 670 && sprite.getPosition().y == 287)
-	{
-		
-		status = 1;
-		sprite.rotate(90);
-	}else if (sprite.getPosition().x == 865 && sprite.getPosition().y == 287)
-	{
-		
-		status = 3;
-		sprite.rotate(90);
-	}
-	else if (sprite.getPosition().x == 865 && sprite.getPosition().y == 672)
-	{
-		
-		status = 1;
-		sprite.rotate(-90);
-	}
-	else if (sprite.getPosition().x == 1630 && sprite.getPosition().y == 672)
-	{
-		sprite.rotate(90);
-		status = 3;
-		
-	}
-	else if (sprite.getPosition().x == 1630 && sprite.getPosition().y == 1017)
-	{
-		cout << "Game Over" << endl;
-	}
-
-	if (status == 1)
-	{
-		sprite.move(5, 0);
-	}else if(status == 2)
-	{
-		sprite.move(0, -5);
-	}
-	else if (status == 3)
-	{
-		sprite.move(0, 5);
-	}
 }
-
 void PlayState::handleInput()
 {
 	sf::Event event;
