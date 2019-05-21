@@ -4,7 +4,7 @@ class Infanterie:public Unites
 {
 protected:
 public:
-	Infanterie(sf::Texture *texture, sf::IntRect intRect);
+	Infanterie(sf::Vector2f position, sf::Texture *texture, sf::IntRect intRect);
 	~Infanterie();
 
 	void rotation(int v_rotation);

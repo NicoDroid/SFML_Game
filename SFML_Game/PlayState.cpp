@@ -34,6 +34,8 @@ PlayState::PlayState(Game* game)
 	this->game = game;
 
 	avion = new vector<Entite*>;
+	avion2 = new vector<Entite*>;
+	anime_destruction = new vector<sf::Sprite>;
 
 	/*
 	avion[0] = new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64));
@@ -58,10 +60,19 @@ PlayState::PlayState(Game* game)
 	{
 		//handle error
 	}
+	if (!texture_explosion.loadFromFile("Ressources/Sheets/explosion.png"))
+	{
+		// erreur...
+	}
 	map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
 
 	life = new Life_Controller(&texture_life);
 	money = new Money_Controller(&texture_map);
+
+	sprite.setTexture(texture_explosion);
+	sprite.setTextureRect(sf::IntRect(289, 33, 70, 70));
+	sprite.setOrigin(32, 32);
+	sprite.setPosition(50,50);
 
 	/*
 	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
@@ -83,11 +94,20 @@ void PlayState::draw(const float dt)
 	{
 		game->window.draw(avion->at(i)->sprite);
 	}
+	for (int i = 0; i < avion2->size(); i++)
+	{
+		game->window.draw(avion2->at(i)->sprite);
+	}
+	for (int i = 0; i < anime_destruction->size(); i++)
+	{
+		game->window.draw(anime_destruction->at(i));
+	}
 	if (Paused->Paused())
 	{
 		game->window.draw(Paused->back_pause);
 		game->window.draw(Paused->text_pause);
 	}
+	//game->window.draw(sprite);
 }
 
 void PlayState::update(const float dt)
@@ -95,25 +115,12 @@ void PlayState::update(const float dt)
 	if (Paused->Paused())
 	{
 		clock.restart();
+		clock2.restart();
 	}
 	else
 	{
-		if (life->getLife() != 0)
-		{
-			if (clock.getElapsedTime().asSeconds() > 2.0f) {
-				avion->push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
-				clock.restart();
-			}
-
-			for (int i = 0; i < avion->size(); i++)
-			{
-				avion->at(i)->road();
-				if (EventController::EventDestroyEntite(avion))
-				{
-					life->decrementLife();
-				}
-			}
-		}
+		EventController::Appariton('a', avion, life, money, &clock, &texture_map, sf::Vector2f(0, 672), 5.0f, &texture_explosion, anime_destruction);
+		//EventController::Appariton('a', avion2, life, money, &clock2, &texture_map, &texture_explosion,sf::Vector2f(0, 606), 3.0f);
 	}
 }
 void PlayState::handleInput()
@@ -139,13 +146,14 @@ void PlayState::handleInput()
 			{
 				money->decrement(1);
 			}
-			break;
 		}
 	}
 }
 
+
+
 /*
-	if (event.key.code == sf::Keyboard::Right)
+	iif (event.key.code == sf::Keyboard::Right)
 			{
 				sprite.move(5, 0);
 
@@ -156,7 +164,7 @@ void PlayState::handleInput()
 			}
 			else if (event.key.code == sf::Keyboard::Left)
 			{
-				sprite.rotate(-90);
+				sprite.move(-5, 0);
 			}
 			else if (event.key.code == sf::Keyboard::Down)
 			{
@@ -167,4 +175,10 @@ void PlayState::handleInput()
 				cout << sprite.getPosition().x << endl;
 				cout << sprite.getPosition().y << endl;
 			}
+			else if (event.key.code == sf::Keyboard::R)
+			{
+				sprite.rotate(90);
+			}
+			break;
+		}
 */

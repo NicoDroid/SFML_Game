@@ -1,6 +1,6 @@
 #include "Unites.h"
 
-Unites::Unites(sf::Texture *texture, sf::IntRect intRect):Entite_mobile(texture,intRect)
+Unites::Unites(sf::Texture *texture, sf::IntRect intRect):Entite_mobile(texture, intRect)
 {
 
 }

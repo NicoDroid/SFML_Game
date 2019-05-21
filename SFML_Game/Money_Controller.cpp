@@ -43,7 +43,6 @@ Money_Controller::Money_Controller(sf::Texture *texture)
 		gestion_affiche(money_deci, money_uni);
 }
 
-
 Money_Controller::~Money_Controller()
 {
 }
@@ -52,7 +51,7 @@ void Money_Controller::increment(int valeur)
 {
 	if (money <99)
 	{
-		money++;
+		money+=valeur;
 
 		int money_deci = money / 10;
 		int money_uni = money % 10;
@@ -65,7 +64,7 @@ void Money_Controller::decrement(int valeur)
 {
 	if (money >0)
 	{
-		money--;
+		money-=valeur;
 
 		int money_deci = money / 10;
 		int money_uni = money % 10;

@@ -26,12 +26,19 @@ private:
 	sf::Font font;
 
 	sf::Texture texture_map;
+	sf::Sprite sprite;
+
 	sf::Texture texture_life;
 	sf::Texture fond_pause;
 
+	sf::Texture texture_explosion;
+
 	sf::Clock clock;
+	sf::Clock clock2;
 
 	std::vector<Entite*> *avion;
+	std::vector<Entite*> *avion2;
+	std::vector<sf::Sprite> *anime_destruction;
 
 public:
 

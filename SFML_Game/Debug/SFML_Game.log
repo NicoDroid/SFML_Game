@@ -1,16 +1,5 @@
-﻿  MenuState.cpp
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\menustate.cpp(17): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\menustate.cpp(18): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-  PlayState.cpp
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\playstate.cpp(82): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\playstate.cpp(108): warning C4018: '<' : incompatibilité signed/unsigned
-  Génération de code en cours...
+﻿  EventController.cpp
+d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\eventcontroller.cpp(30): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\eventcontroller.cpp(64): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\eventcontroller.cpp(41): warning C4715: 'EventController::EventDestroyEntite' : les chemins de contrôle ne retournent pas tous une valeur
   SFML_Game.vcxproj -> D:\Users\UnCreativeDroid\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe

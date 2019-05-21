@@ -1,12 +1,12 @@
 #include "Entite.h"
+#include <iostream>
 
-Entite::Entite(sf::Texture *texture,sf::IntRect intRect)
+Entite::Entite(sf::Texture *texture, sf::IntRect intRect)
 {
 	this->sprite.setTexture(*texture);
 	this->sprite.setTextureRect(intRect);
 	this->sprite.setOrigin(32, 32);
 }
-
 
 Entite::~Entite()
 {
