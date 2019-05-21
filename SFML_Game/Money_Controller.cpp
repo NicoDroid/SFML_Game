@@ -49,7 +49,7 @@ Money_Controller::~Money_Controller()
 
 void Money_Controller::increment(int valeur)
 {
-	if (money <99)
+	if (money <95)
 	{
 		money+=valeur;
 

@@ -1,5 +1,5 @@
-﻿  EventController.cpp
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\eventcontroller.cpp(30): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\eventcontroller.cpp(64): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\eventcontroller.cpp(41): warning C4715: 'EventController::EventDestroyEntite' : les chemins de contrôle ne retournent pas tous une valeur
-  SFML_Game.vcxproj -> D:\Users\UnCreativeDroid\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe
+﻿  PlayState.cpp
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(85): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(89): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(93): warning C4018: '<' : incompatibilité signed/unsigned
+  SFML_Game.vcxproj -> D:\Users\Nicolas\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe

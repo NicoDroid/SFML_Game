@@ -20,5 +20,7 @@ public:
 	virtual void setMouvement(int v_mouvement) {};
 	virtual int getMouvement() { return 0; };
 	virtual void road() {};
+	virtual void decrementLifeEntite(int v_life) {};
+	virtual int getLife() { return 0; };
 };
 

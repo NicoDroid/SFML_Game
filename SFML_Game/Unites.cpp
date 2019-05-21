@@ -43,3 +43,13 @@ int Unites::getMouvement()
 {
 	return this->mouvement;
 }
+
+int Unites::getLife()
+{
+	return this->life;
+}
+
+void Unites::decrementLifeEntite(int v_life)
+{
+	this->life-=v_life;
+}

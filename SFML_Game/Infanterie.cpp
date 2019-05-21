@@ -50,7 +50,7 @@ void Infanterie::road()
 		this->rotation(90);
 		this->setMouvement(2);
 	}
-	else if (this->getPosition().x == 1630 && this->getPosition().y == 912) //1012
+	else if (this->getPosition().x == 1630 && this->getPosition().y == 1012)
 	{
 		this->setMouvement(-1);
 		std::cout << "Game Over" << std::endl;

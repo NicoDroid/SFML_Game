@@ -73,14 +73,6 @@ PlayState::PlayState(Game* game)
 	sprite.setTextureRect(sf::IntRect(289, 33, 70, 70));
 	sprite.setOrigin(32, 32);
 	sprite.setPosition(50,50);
-
-	/*
-	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
-	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
-	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
-	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
-	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
-	*/
 }
 
 void PlayState::draw(const float dt)
@@ -101,6 +93,11 @@ void PlayState::draw(const float dt)
 	for (int i = 0; i < anime_destruction->size(); i++)
 	{
 		game->window.draw(anime_destruction->at(i));
+		time_explosion += dt;
+		if (time_explosion > 0.5f) {
+			anime_destruction->erase(anime_destruction->begin() + i);
+			time_explosion = 0;
+		}
 	}
 	if (Paused->Paused())
 	{
@@ -119,8 +116,8 @@ void PlayState::update(const float dt)
 	}
 	else
 	{
-		EventController::Appariton('a', avion, life, money, &clock, &texture_map, sf::Vector2f(0, 672), 5.0f, &texture_explosion, anime_destruction);
-		//EventController::Appariton('a', avion2, life, money, &clock2, &texture_map, &texture_explosion,sf::Vector2f(0, 606), 3.0f);
+		EventController::Appariton_Disparition('a', avion, life, money, &clock, &texture_map, sf::Vector2f(0, 672), 3.0f, &texture_explosion, anime_destruction);
+		EventController::Appariton_Disparition('a', avion2, life, money, &clock2, &texture_map,sf::Vector2f(0, 606), 5.0f, &texture_explosion, anime_destruction);
 	}
 }
 void PlayState::handleInput()
@@ -145,6 +142,12 @@ void PlayState::handleInput()
 			else if (event.key.code == sf::Keyboard::Z && !Paused->Paused())
 			{
 				money->decrement(1);
+			}
+			else if (event.key.code == sf::Keyboard::L && !Paused->Paused())
+			{
+				EventController::Nuclear_Destruction('n', avion, money, &texture_map, &texture_explosion, anime_destruction);
+				EventController::Nuclear_Destruction('n', avion2, money, &texture_map, &texture_explosion, anime_destruction);
+				std::cout << money->getMoney() << endl;
 			}
 		}
 	}

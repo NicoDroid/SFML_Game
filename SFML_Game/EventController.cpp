@@ -25,20 +25,26 @@ EventController::~EventController()
 }
 
 //Gestion des destruction d'entites
-bool EventController::EventDestroyEntite(std::vector<Entite*> *entite, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction)
+int EventController::EventDestroyEntite(std::vector<Entite*> *entite, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction)
 {
 	for (int i = 0; i < entite->size(); i++)
 	{
 		if (entite->at(i)->getMouvement() == -1)
 		{
+			delete entite->at(i);
+			entite->erase(entite->begin() + i);
+			return 1;
+		}
+		if (entite->at(i)->getLife() == 0 && entite->at(i)->getMouvement() != -1)
+		{
 			EventController::AnimeDestruction(texture_explosion, entite->at(i)->getPosition(), sprite_destruction);
 			delete entite->at(i);
 			entite->erase(entite->begin() + i);
-			return true;
+			return 2;
 		}
-		return false;
+		return 0;
 	}
-} //Gestio,
+}
 
 //Fonctions des pauses
 void EventController::Paused(bool paused)
@@ -51,20 +57,19 @@ bool EventController::Paused()
 }
 
 //Gestion des apparitionn d'entites
-void EventController::Appariton(char a, std::vector<Entite*> *entite, Life_Controller *life, Money_Controller *money, sf::Clock *clock, sf::Texture *texture_map, sf::Vector2f position, float vitesse_apparition, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction)
+void EventController::Appariton_Disparition(char a, std::vector<Entite*> *entite, Life_Controller *life, Money_Controller *money, sf::Clock *clock, sf::Texture *texture_map, sf::Vector2f position, float vitesse_apparition, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction)
 {
 	if (life->getLife() != 0)
 	{
 		if (clock->getElapsedTime().asSeconds() > vitesse_apparition) {
 			entite->push_back(new Infanterie(position, texture_map, sf::IntRect(1152, 704, 64, 64)));
-			money->increment(5);
 			clock->restart();
 		}
 
 		for (int i = 0; i < entite->size(); i++)
 		{
 			entite->at(i)->road();
-			if (EventController::EventDestroyEntite(entite,texture_explosion,sprite_destruction))
+			if (EventController::EventDestroyEntite(entite,texture_explosion,sprite_destruction)==1)
 			{
 				life->decrementLife();
 			}
@@ -79,5 +84,16 @@ void EventController::AnimeDestruction(sf::Texture *texture_explosion, sf::Vecto
 	sprite.setOrigin(35,35);
 	sprite_destruction->push_back(sprite);
 }
+
+void EventController::Nuclear_Destruction(char n, std::vector<Entite*> *entite, Money_Controller *money, sf::Texture *texture_map, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction)
+{
+	for (int i = 0; i < entite->size(); i++)
+	{
+		entite->at(i)->decrementLifeEntite(5);
+		money->increment(5);
+	}
+	EventController::EventDestroyEntite(entite, texture_explosion, sprite_destruction);
+}
+
 
 

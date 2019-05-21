@@ -40,6 +40,8 @@ private:
 	std::vector<Entite*> *avion2;
 	std::vector<sf::Sprite> *anime_destruction;
 
+	float time_explosion = 0;
+
 public:
 
 	PlayState(Game* game);
