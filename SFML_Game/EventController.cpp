@@ -69,7 +69,7 @@ void EventController::Appariton_Disparition(char a, std::vector<Entite*> *entite
 		for (int i = 0; i < entite->size(); i++)
 		{
 			entite->at(i)->road();
-			if (EventController::EventDestroyEntite(entite,texture_explosion,sprite_destruction)==1)
+			if (EventController::EventDestroyEntite(entite, texture_explosion, sprite_destruction) == 1)
 			{
 				life->decrementLife();
 			}
@@ -81,7 +81,7 @@ void EventController::AnimeDestruction(sf::Texture *texture_explosion, sf::Vecto
 {
 	sf::Sprite sprite(*texture_explosion, sf::IntRect(289, 33, 70, 70));
 	sprite.setPosition(position);
-	sprite.setOrigin(35,35);
+	sprite.setOrigin(35, 35);
 	sprite_destruction->push_back(sprite);
 }
 
@@ -93,6 +93,38 @@ void EventController::Nuclear_Destruction(char n, std::vector<Entite*> *entite, 
 		money->increment(5);
 	}
 	EventController::EventDestroyEntite(entite, texture_explosion, sprite_destruction);
+}
+
+void EventController::MouseChoiceTower(sf::Vector2i localPosition, InputController *input, bool *Temp_mouse, int *Temp_tower)
+{
+	if ((localPosition.x >= input->sprite[0].getPosition().x && localPosition.x <= input->sprite[0].getPosition().x + 64) && (localPosition.y >= input->sprite[0].getPosition().y && localPosition.y <= input->sprite[0].getPosition().y + 64))
+	{
+		std::cout << "Dedans1" << std::endl;
+		*Temp_mouse = true;
+		*Temp_tower = 0;
+
+	}else if ((localPosition.x >= input->sprite[1].getPosition().x && localPosition.x <= input->sprite[1].getPosition().x + 64) && (localPosition.y >= input->sprite[1].getPosition().y && localPosition.y <= input->sprite[1].getPosition().y + 64))
+	{
+		std::cout << "Dedans2" << std::endl;
+		*Temp_mouse = true;
+		*Temp_tower = 1;
+	}
+}
+
+void EventController::MouseCreateTower(sf::Texture *texture, sf::Vector2i localPosition, std::vector<Entite*> *entite , bool *Temp_mouse, int *Temp_tower)
+{
+	if (*Temp_tower == 0)
+	{
+		std::cout << "Pose1" << std::endl;
+		*Temp_mouse = false;
+		entite->push_back(new Towers(texture, sf::IntRect(0, 0, 64, 64), 5, 8, sf::Vector2f((float)localPosition.x, (float)localPosition.y)));
+	}
+	else if(*Temp_tower == 1)
+	{
+		std::cout << "Pose2" << std::endl;
+		*Temp_mouse = false;
+		entite->push_back(new Towers(texture, sf::IntRect(64, 0, 64,64), 8, 7, sf::Vector2f((float)localPosition.x, (float)localPosition.y)));
+	}
 }
 
 

@@ -1,5 +1,2 @@
-﻿  PlayState.cpp
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(85): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(89): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(93): warning C4018: '<' : incompatibilité signed/unsigned
+﻿  Game.cpp
   SFML_Game.vcxproj -> D:\Users\Nicolas\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe

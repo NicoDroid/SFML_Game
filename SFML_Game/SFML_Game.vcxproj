@@ -127,10 +127,12 @@
   <ItemGroup>
     <ClCompile Include="Entite.cpp" />
     <ClCompile Include="Entite_mobile.cpp" />
+    <ClCompile Include="Entite_statique.cpp" />
     <ClCompile Include="EventController.cpp" />
     <ClCompile Include="FileController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Infanterie.cpp" />
+    <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Life_Controller.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapEngineController.cpp" />
@@ -139,16 +141,19 @@
     <ClCompile Include="OptionState.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SoundController.cpp" />
+    <ClCompile Include="Towers.cpp" />
     <ClCompile Include="Unites.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entite.h" />
     <ClInclude Include="Entite_mobile.h" />
+    <ClInclude Include="Entite_statique.h" />
     <ClInclude Include="EventController.h" />
     <ClInclude Include="FileController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Infanterie.h" />
+    <ClInclude Include="InputController.h" />
     <ClInclude Include="Life_Controller.h" />
     <ClInclude Include="MapEngineController.h" />
     <ClInclude Include="MenuState.h" />
@@ -156,6 +161,7 @@
     <ClInclude Include="OptionState.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SoundController.h" />
+    <ClInclude Include="Towers.h" />
     <ClInclude Include="Unites.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

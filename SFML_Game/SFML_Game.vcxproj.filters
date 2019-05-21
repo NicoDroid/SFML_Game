@@ -37,6 +37,12 @@
     <Filter Include="Fichiers sources\Entite\Mobile">
       <UniqueIdentifier>{4f7875c3-ebda-443e-abcf-8907e3b2e003}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entite\Statique">
+      <UniqueIdentifier>{61a60be0-3a16-4fdc-9bd7-123050bc1b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Entite\Statique">
+      <UniqueIdentifier>{6779d516-9459-4ce0-aa83-8fc94ceb1fbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -84,6 +90,15 @@
     <ClCompile Include="Money_Controller.cpp">
       <Filter>Fichiers sources\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="InputController.cpp">
+      <Filter>Fichiers sources\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Entite_statique.cpp">
+      <Filter>Fichiers sources\Entite\Statique</Filter>
+    </ClCompile>
+    <ClCompile Include="Towers.cpp">
+      <Filter>Fichiers sources\Entite\Statique</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundController.h">
@@ -130,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="Money_Controller.h">
       <Filter>Fichiers d%27en-tête\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="InputController.h">
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Entite_statique.h">
+      <Filter>Fichiers d%27en-tête\Entite\Statique</Filter>
+    </ClInclude>
+    <ClInclude Include="Towers.h">
+      <Filter>Fichiers d%27en-tête\Entite\Statique</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

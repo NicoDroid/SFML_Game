@@ -33,14 +33,6 @@ PlayState::PlayState(Game* game)
 {
 	this->game = game;
 
-	avion = new vector<Entite*>;
-	avion2 = new vector<Entite*>;
-	anime_destruction = new vector<sf::Sprite>;
-
-	/*
-	avion[0] = new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64));
-	avion->setPosition(sf::Vector2f(0, 672));*/
-
 	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"))
 	{
 		// erreur...
@@ -49,9 +41,14 @@ PlayState::PlayState(Game* game)
 	{
 		// erreur...
 	}
-	Paused = new EventController('p', &font, &fond_pause);
-
-	// on charge la texture du tileset
+	if (!texture_bouton.loadFromFile("Ressources/Sheets/boutons.png"))
+	{
+		// erreur...
+	}
+	if (!texture_fond_bouton.loadFromFile("Ressources/Sheets/fond_boutons.png"))
+	{
+		// erreur...
+	}
 	if (!texture_map.loadFromFile("Ressources/Tiled/Tilesheet.png"))
 	{
 		//handle error
@@ -64,10 +61,27 @@ PlayState::PlayState(Game* game)
 	{
 		// erreur...
 	}
-	map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
+	if (!texture_tower.loadFromFile("Ressources/Sheets/towers.png"))
+	{
+		// erreur...
+	}
 
-	life = new Life_Controller(&texture_life);
-	money = new Money_Controller(&texture_map);
+	Temp_mouse = new bool(false);
+	Temp_tower = new int(0);
+
+	tower = new vector<Entite*>;
+	avion = new vector<Entite*>;
+	avion2 = new vector<Entite*>;
+	anime_destruction = new vector<sf::Sprite>;
+	
+	Paused = new EventController('p', &font, &fond_pause);
+
+	Input = new InputController(&texture_map, &texture_fond_bouton, &texture_bouton, sf::Vector2f(20,888), sf::Vector2f(84,952), sf::Vector2f(148,952),1,5);
+
+	Map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
+
+	Life = new Life_Controller(&texture_life);
+	Money = new Money_Controller(&texture_map);
 
 	sprite.setTexture(texture_explosion);
 	sprite.setTextureRect(sf::IntRect(289, 33, 70, 70));
@@ -77,11 +91,22 @@ PlayState::PlayState(Game* game)
 
 void PlayState::draw(const float dt)
 {
-	game->window.draw(map_one);
-	game->window.draw(money->sprite_dollar);
-	game->window.draw(money->sprite_deci);
-	game->window.draw(money->sprite_uni);
-	game->window.draw(life->sprite);
+	game->window.draw(Map_one);
+	game->window.draw(Money->sprite_dollar);
+	game->window.draw(Money->sprite_deci);
+	game->window.draw(Money->sprite_uni);
+	game->window.draw(Life->sprite);
+
+	game->window.draw(Input->sprite_fond);
+	for (int i = 0; i < Input->getTaille(); i++)
+	{
+		game->window.draw(Input->sprite[i]);
+		game->window.draw(Input->sprite_prix[i]);
+	}
+	for (int i = 0; i < tower->size(); i++)
+	{
+		game->window.draw(tower->at(i)->sprite);
+	}
 	for (int i = 0; i < avion->size(); i++)
 	{
 		game->window.draw(avion->at(i)->sprite);
@@ -116,8 +141,8 @@ void PlayState::update(const float dt)
 	}
 	else
 	{
-		EventController::Appariton_Disparition('a', avion, life, money, &clock, &texture_map, sf::Vector2f(0, 672), 3.0f, &texture_explosion, anime_destruction);
-		EventController::Appariton_Disparition('a', avion2, life, money, &clock2, &texture_map,sf::Vector2f(0, 606), 5.0f, &texture_explosion, anime_destruction);
+		EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, sf::Vector2f(0, 672), 3.0f, &texture_explosion, anime_destruction);
+		EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map,sf::Vector2f(0, 606), 5.0f, &texture_explosion, anime_destruction);
 	}
 }
 void PlayState::handleInput()
@@ -131,23 +156,39 @@ void PlayState::handleInput()
 		case sf::Event::Closed:
 			this->game->window.close();
 			break;
+		case sf::Event::MouseButtonPressed:
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				sf::Vector2i localPosition = sf::Mouse::getPosition(game->window);
+				std::cout << "x: " << localPosition.x << endl;
+				std::cout << "y: " << localPosition.y << endl;
+				
+				if (*Temp_mouse == true)
+				{
+					EventController::MouseCreateTower(&texture_tower, localPosition, tower, Temp_mouse, Temp_tower);
+				}
+				else
+				{
+					EventController::MouseChoiceTower(localPosition, Input, Temp_mouse, Temp_tower);
+				}
+			}
 
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::P)
 				Paused->Paused(!Paused->Paused());
-			else if (event.key.code == sf::Keyboard::A && !Paused->Paused())
-			{
-				money->increment(1);
-			}
 			else if (event.key.code == sf::Keyboard::Z && !Paused->Paused())
 			{
-				money->decrement(1);
+				Money->increment(1);
+			}
+			else if (event.key.code == sf::Keyboard::E && !Paused->Paused())
+			{
+				Money->decrement(1);
 			}
 			else if (event.key.code == sf::Keyboard::L && !Paused->Paused())
 			{
-				EventController::Nuclear_Destruction('n', avion, money, &texture_map, &texture_explosion, anime_destruction);
-				EventController::Nuclear_Destruction('n', avion2, money, &texture_map, &texture_explosion, anime_destruction);
-				std::cout << money->getMoney() << endl;
+				EventController::Nuclear_Destruction('n', avion, Money, &texture_map, &texture_explosion, anime_destruction);
+				EventController::Nuclear_Destruction('n', avion2, Money, &texture_map, &texture_explosion, anime_destruction);
+				std::cout << Money->getMoney() << endl;
 			}
 		}
 	}

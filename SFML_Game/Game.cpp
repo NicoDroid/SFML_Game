@@ -4,7 +4,7 @@
 
 Game::Game()
 {
-	window.create(sf::VideoMode(1920, 1080), "Best Game Forever");
+	window.create(sf::VideoMode(1920, 1080), "Best Game Forever",sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
 }
 

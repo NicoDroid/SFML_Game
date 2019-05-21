@@ -4,6 +4,8 @@
 #include "Life_Controller.h"
 #include "Money_Controller.h"
 #include "Infanterie.h"
+#include "InputController.h"
+#include "Towers.h"
 
 class EventController
 {
@@ -27,6 +29,9 @@ public:
 
 	static int EventDestroyEntite(std::vector<Entite*> *entite, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction);
 	static void AnimeDestruction(sf::Texture *texture_explosion, sf::Vector2f position, std::vector<sf::Sprite> *sprite_destruction);
+
+	static void MouseChoiceTower(sf::Vector2i locallPosition, InputController *input, bool *Temp_mouse, int *Temp_tower);
+	static void MouseCreateTower(sf::Texture *texture, sf::Vector2i localPosition, std::vector<Entite*> *entite, bool *Temp_mouse, int *Temp_tower);
 
 	void Paused(bool paused);
 	bool Paused();
