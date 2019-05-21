@@ -131,9 +131,11 @@
     <ClCompile Include="FileController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Infanterie.cpp" />
+    <ClCompile Include="Life_Controller.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapEngineController.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Money_Controller.cpp" />
     <ClCompile Include="OptionState.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SoundController.cpp" />
@@ -147,8 +149,10 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Infanterie.h" />
+    <ClInclude Include="Life_Controller.h" />
     <ClInclude Include="MapEngineController.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Money_Controller.h" />
     <ClInclude Include="OptionState.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SoundController.h" />

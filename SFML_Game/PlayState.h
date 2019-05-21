@@ -8,6 +8,9 @@
 #include "MapEngineController.h"
 #include "Entite.h"
 #include "Infanterie.h"
+#include "Life_Controller.h"
+#include "Money_Controller.h"
+#include "EventController.h"
 
 
 class PlayState : public GameState
@@ -15,10 +18,17 @@ class PlayState : public GameState
 private:
 	void PauseGame();
 
-	int test = 0;
-
+	EventController *Paused;
 	MapEngineController map_one;
+	Life_Controller *life;
+	Money_Controller *money;
+	
+	sf::Font font;
+
 	sf::Texture texture_map;
+	sf::Texture texture_life;
+	sf::Texture fond_pause;
+
 	sf::Clock clock;
 
 	std::vector<Entite*> *avion;

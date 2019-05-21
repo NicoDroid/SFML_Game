@@ -5,7 +5,6 @@
 #include "PlayState.h"
 #include "MenuState.h"
 #include "GameState.h"
-#include "EventController.h"
 
 const int level[] =
 {
@@ -40,12 +39,29 @@ PlayState::PlayState(Game* game)
 	avion[0] = new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64));
 	avion->setPosition(sf::Vector2f(0, 672));*/
 
+	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"))
+	{
+		// erreur...
+	}
+	if (!fond_pause.loadFromFile("Ressources/Sheets/back_paused.png"))
+	{
+		// erreur...
+	}
+	Paused = new EventController('p', &font, &fond_pause);
+
 	// on charge la texture du tileset
 	if (!texture_map.loadFromFile("Ressources/Tiled/Tilesheet.png"))
 	{
 		//handle error
 	}
+	if (!texture_life.loadFromFile("Ressources/Sheets/sheet_vie.png"))
+	{
+		//handle error
+	}
 	map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
+
+	life = new Life_Controller(&texture_life);
+	money = new Money_Controller(&texture_map);
 
 	/*
 	avion.push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
@@ -59,28 +75,46 @@ PlayState::PlayState(Game* game)
 void PlayState::draw(const float dt)
 {
 	game->window.draw(map_one);
-
+	game->window.draw(money->sprite_dollar);
+	game->window.draw(money->sprite_deci);
+	game->window.draw(money->sprite_uni);
+	game->window.draw(life->sprite);
 	for (int i = 0; i < avion->size(); i++)
 	{
 		game->window.draw(avion->at(i)->sprite);
 	}
-	
+	if (Paused->Paused())
+	{
+		game->window.draw(Paused->back_pause);
+		game->window.draw(Paused->text_pause);
+	}
 }
 
 void PlayState::update(const float dt)
 {
-
-	if (clock.getElapsedTime().asSeconds() > 2.0f) {
-		avion->push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+	if (Paused->Paused())
+	{
 		clock.restart();
 	}
-
-	for (int i = 0; i < avion->size(); i++)
+	else
 	{
-		avion->at(i)->road();
-		EventController::EventDestroyEntite(avion);
+		if (life->getLife() != 0)
+		{
+			if (clock.getElapsedTime().asSeconds() > 2.0f) {
+				avion->push_back(new Infanterie(&texture_map, sf::IntRect(1152, 704, 64, 64)));
+				clock.restart();
+			}
+
+			for (int i = 0; i < avion->size(); i++)
+			{
+				avion->at(i)->road();
+				if (EventController::EventDestroyEntite(avion))
+				{
+					life->decrementLife();
+				}
+			}
+		}
 	}
-	
 }
 void PlayState::handleInput()
 {
@@ -95,20 +129,20 @@ void PlayState::handleInput()
 			break;
 
 		case sf::Event::KeyPressed:
-			if (event.key.code == sf::Keyboard::Escape)
-				PauseGame();		
+			if (event.key.code == sf::Keyboard::P)
+				Paused->Paused(!Paused->Paused());
+			else if (event.key.code == sf::Keyboard::A && !Paused->Paused())
+			{
+				money->increment(1);
+			}
+			else if (event.key.code == sf::Keyboard::Z && !Paused->Paused())
+			{
+				money->decrement(1);
+			}
 			break;
 		}
 	}
 }
-
-void PlayState::PauseGame()
-{
-	std::cout << "Pause" << std::endl;
-}
-
-
-
 
 /*
 	if (event.key.code == sf::Keyboard::Right)
