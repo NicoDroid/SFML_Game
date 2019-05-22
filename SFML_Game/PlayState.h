@@ -52,6 +52,8 @@ private:
 	std::vector<Entite*> *tower;
 
 	float time_explosion = 0;
+	float time_apparition = 0;
+	float *cadence_tir;
 
 public:
 

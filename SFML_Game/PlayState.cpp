@@ -68,6 +68,7 @@ PlayState::PlayState(Game* game)
 
 	Temp_mouse = new bool(false);
 	Temp_tower = new int(0);
+	cadence_tir = new float(0);
 
 	tower = new vector<Entite*>;
 	avion = new vector<Entite*>;
@@ -76,7 +77,7 @@ PlayState::PlayState(Game* game)
 	
 	Paused = new EventController('p', &font, &fond_pause);
 
-	Input = new InputController(&texture_map, &texture_fond_bouton, &texture_bouton, sf::Vector2f(20,888), sf::Vector2f(84,952), sf::Vector2f(148,952),1,5);
+	Input = new InputController(&texture_map, &texture_fond_bouton, &texture_bouton, sf::Vector2f(20,888), sf::Vector2f(84,952), sf::Vector2f(148,952),2,5);
 
 	Map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
 
@@ -119,7 +120,7 @@ void PlayState::draw(const float dt)
 	{
 		game->window.draw(anime_destruction->at(i));
 		time_explosion += dt;
-		if (time_explosion > 0.5f) {
+		if (time_explosion > 0.2f) {
 			anime_destruction->erase(anime_destruction->begin() + i);
 			time_explosion = 0;
 		}
@@ -141,8 +142,12 @@ void PlayState::update(const float dt)
 	}
 	else
 	{
-		EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, sf::Vector2f(0, 672), 3.0f, &texture_explosion, anime_destruction);
-		EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map,sf::Vector2f(0, 606), 5.0f, &texture_explosion, anime_destruction);
+
+			//EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, sf::Vector2f(0, 672), 5.0f, &texture_explosion, anime_destruction);
+			EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map,sf::Vector2f(0, 604), 5.0f, &texture_explosion, anime_destruction);
+			//EventController::Detection_enemi(avion, tower, &texture_explosion, anime_destruction, cadence_tir);
+			EventController::Detection_enemi(avion2, tower, &texture_explosion, anime_destruction, cadence_tir);	
+			*cadence_tir += dt;
 	}
 }
 void PlayState::handleInput()
@@ -165,7 +170,7 @@ void PlayState::handleInput()
 				
 				if (*Temp_mouse == true)
 				{
-					EventController::MouseCreateTower(&texture_tower, localPosition, tower, Temp_mouse, Temp_tower);
+					EventController::MouseCreateTower(&texture_tower, localPosition, tower, Temp_mouse, Temp_tower, Money);
 				}
 				else
 				{

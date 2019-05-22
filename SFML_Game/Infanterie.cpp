@@ -24,33 +24,33 @@ void Infanterie::road()
 	{
 		this->setMouvement(6);
 	}
-	else if (this->getPosition().x == 670 && this->getPosition().y == 672)
+	else if (this->getPosition().x == 668 && this->getPosition().y == 672)
 	{
 		this->rotation(-90);
 		this->setMouvement(8);
 
 	}
-	else if (this->getPosition().x == 670 && this->getPosition().y == 287)
+	else if (this->getPosition().x == 668 && this->getPosition().y == 284)
 	{
 		this->rotation(90);
 		this->setMouvement(6);
 	}
-	else if (this->getPosition().x == 865 && this->getPosition().y == 287)
+	else if (this->getPosition().x == 864 && this->getPosition().y == 284)
 	{
 		this->rotation(90);
 		this->setMouvement(2);
 	}
-	else if (this->getPosition().x == 865 && this->getPosition().y == 672)
+	else if (this->getPosition().x == 864 && this->getPosition().y == 672)
 	{
 		this->rotation(-90);
 		this->setMouvement(6);
 	}
-	else if (this->getPosition().x == 1630 && this->getPosition().y == 672)
+	else if (this->getPosition().x == 1628 && this->getPosition().y == 672)
 	{
 		this->rotation(90);
 		this->setMouvement(2);
 	}
-	else if (this->getPosition().x == 1630 && this->getPosition().y == 1012)
+	else if (this->getPosition().x == 1628 && this->getPosition().y == 1016)
 	{
 		this->setMouvement(-1);
 		std::cout << "Game Over" << std::endl;
@@ -58,37 +58,37 @@ void Infanterie::road()
 
 
 	//Vague 2
-	if (this->getPosition().x == 0 && this->getPosition().y == 606)
+	if (this->getPosition().x == 0 && this->getPosition().y == 604)
 	{
 		this->setMouvement(6);
 	}
-	else if (this->getPosition().x == 605 && this->getPosition().y == 606)
+	else if (this->getPosition().x == 604 && this->getPosition().y == 604)
 	{
 		this->rotation(-90);
 		this->setMouvement(8);
 
 	}
-	else if (this->getPosition().x == 605 && this->getPosition().y == 221)
+	else if (this->getPosition().x == 604 && this->getPosition().y == 220)
 	{
 		this->rotation(90);
 		this->setMouvement(6);
 	}
-	else if (this->getPosition().x == 930 && this->getPosition().y == 221)
+	else if (this->getPosition().x == 928 && this->getPosition().y == 220)
 	{
 		this->rotation(90);
 		this->setMouvement(2);
 	}
-	else if (this->getPosition().x == 930 && this->getPosition().y == 606)
+	else if (this->getPosition().x == 928 && this->getPosition().y == 604)
 	{
 		this->rotation(-90);
 		this->setMouvement(6);
 	}
-	else if (this->getPosition().x == 1700 && this->getPosition().y == 606)
+	else if (this->getPosition().x == 1700 && this->getPosition().y == 604)
 	{
 		this->rotation(90);
 		this->setMouvement(2);
 	}
-	else if (this->getPosition().x == 1700 && this->getPosition().y == 1106)
+	else if (this->getPosition().x == 1700 && this->getPosition().y == 1016)
 	{
 		this->setMouvement(-1);
 		std::cout << "Game Over" << std::endl;

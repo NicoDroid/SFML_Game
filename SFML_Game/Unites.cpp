@@ -18,19 +18,19 @@ void Unites::deplacement()
 	}
 	else if (mouvement == 6) //Droite
 	{
-		sprite.move(5, 0);
+		sprite.move(4, 0);
 	}
 	else if (mouvement == 2) //Bas
 	{
-		sprite.move(0, 5);
+		sprite.move(0, 4);
 	}
 	else if (mouvement == 4) //Gauche
 	{
-		sprite.move(-5, 0);
+		sprite.move(-4, 0);
 	}
 	else if (mouvement == 8) //Haut
 	{
-		sprite.move(0, -5);
+		sprite.move(0, -4);
 	}	
 }
 

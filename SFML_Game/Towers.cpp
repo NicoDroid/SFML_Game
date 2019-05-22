@@ -13,4 +13,19 @@ Towers::~Towers()
 {
 }
 
+int Towers::getDegat()
+{
+	return this->degat;
+}
+
+void Towers::setCadence(bool cadence)
+{
+	this->cadence_tir = cadence;
+}
+
+bool Towers::getCadence()
+{
+	return this->cadence_tir;
+}
+
 

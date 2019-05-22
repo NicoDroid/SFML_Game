@@ -22,5 +22,8 @@ public:
 	virtual void road() {};
 	virtual void decrementLifeEntite(int v_life) {};
 	virtual int getLife() { return 0; };
+	virtual int getDegat() { return 0; };
+	virtual void setCadence(bool cadence) {};
+	virtual bool getCadence() { return false; };
 };
 
