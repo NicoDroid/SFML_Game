@@ -9,15 +9,21 @@ EventController::EventController()
 //Gestion des pauses
 EventController::EventController(char p, sf::Font *font, sf::Texture *texture)
 {
-	back_pause.setTexture(*texture);
-	back_pause.setColor(sf::Color(255, 255, 255, 158));
-	back_pause.scale(sf::Vector2f(2, 2));
+	this->back__pause_gameover.setTexture(*texture);
+	this->back__pause_gameover.setColor(sf::Color(255, 255, 255, 158));
+	this->back__pause_gameover.scale(sf::Vector2f(2, 2));
 
-	text_pause.setFont(*font);
-	text_pause.setString("PAUSE");
-	text_pause.setCharacterSize(40);
-	text_pause.setFillColor(sf::Color::White);
-	text_pause.setPosition(1720 / 2, 880 / 2);
+	this->text_pause.setFont(*font);
+	this->text_pause.setString("PAUSE");
+	this->text_pause.setCharacterSize(40);
+	this->text_pause.setFillColor(sf::Color::White);
+	this->text_pause.setPosition(1720 / 2, 880 / 2);
+
+	this->text_game_over.setFont(*font);
+	this->text_game_over.setString("GAME OVER !");
+	this->text_game_over.setCharacterSize(40);
+	this->text_game_over.setFillColor(sf::Color::White);
+	this->text_game_over.setPosition(1720 / 2, 880 / 2);
 }
 
 EventController::~EventController()
@@ -57,13 +63,22 @@ bool EventController::Paused()
 	return this->paused;
 }
 
+void EventController::GameOver(bool gameover)
+{
+	this->gameover = gameover;
+}
+bool EventController::GameOver()
+{
+	return this->gameover;
+}
+
 //Gestion des apparitionn d'entites
-void EventController::Appariton_Disparition(char a, std::vector<Entite*> *entite, Life_Controller *life, Money_Controller *money, sf::Clock *clock, sf::Texture *texture_map, sf::Vector2f position, float vitesse_apparition, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction)
+void EventController::Appariton_Disparition(char a, std::vector<Entite*> *entite, Life_Controller *life, Money_Controller *money, sf::Clock *clock, sf::Texture *texture_map, sf::Texture *texture_life, sf::Vector2f position, float vitesse_apparition, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction)
 {
 	if (life->getLife() != 0)
 	{
 		if (clock->getElapsedTime().asSeconds() > vitesse_apparition) {
-			entite->push_back(new Infanterie(position, texture_map, sf::IntRect(1152, 704, 64, 64)));
+			entite->push_back(new Infanterie(position, texture_map, texture_life, sf::IntRect(1152, 704, 64, 64)));
 			clock->restart();
 		}
 
@@ -116,7 +131,7 @@ void EventController::MouseChoiceTower(sf::Vector2i localPosition, InputControll
 	}
 }
 
-void EventController::MouseCreateTower(sf::Texture *texture, sf::Vector2i localPosition, std::vector<Entite*> *entite , bool *Temp_mouse, int *Temp_tower, Money_Controller *money)
+void EventController::MouseCreateTower(sf::Texture *texture, sf::Texture *texture_feu, sf::Vector2i localPosition, std::vector<Entite*> *entite , bool *Temp_mouse, int *Temp_tower, Money_Controller *money)
 {
 	if (*Temp_tower == 0 && money->getMoney()>=2)
 	{
@@ -125,7 +140,7 @@ void EventController::MouseCreateTower(sf::Texture *texture, sf::Vector2i localP
 		int y = (localPosition.y / 64) * 64;
 		std::cout << "Pose1" << std::endl;
 		*Temp_mouse = false;
-		entite->push_back(new Towers(texture, sf::IntRect(0, 0, 64, 64), 2, 1, sf::Vector2f((float)x + 32, (float)y + 32)));
+		entite->push_back(new Towers(texture, texture_feu, 19, sf::IntRect(0, 0, 64, 64), 2, 1, sf::Vector2f((float)x + 32, (float)y + 32)));
 	}
 	else if(*Temp_tower == 1 && money->getMoney() >= 5)
 	{
@@ -134,7 +149,7 @@ void EventController::MouseCreateTower(sf::Texture *texture, sf::Vector2i localP
 		int y = (localPosition.y / 64) * 64;
 		std::cout << "Pose2" << std::endl;
 		*Temp_mouse = false;
-		entite->push_back(new Towers(texture, sf::IntRect(64, 0, 64,64), 5, 2, sf::Vector2f((float)x + 32, (float)y + 32)));
+		entite->push_back(new Towers(texture, texture_feu, 20, sf::IntRect(64, 0, 64,64), 5, 2, sf::Vector2f((float)x + 32, (float)y + 32)));
 	}
 	else
 	{
@@ -146,14 +161,15 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 {
 		for (int i = 0; i < tower->size(); i++)
 		{
+			tower->at(i)->setTimeFire(tower->at(i)->getTimeFire(), dt);
 			for (int j = 0; j < enemi->size(); j++)
-			{
+			{	
 					//Haut
 					if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y - 128 && !tower->at(i)->getCadence())
 					{
-						
 						tower->at(i)->setCadence(true);
-						tower->at(i)->setRotate(0);
+						tower->at(i)->setRotate(0);				
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheHM" << std::endl;
 					}
@@ -161,6 +177,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(11);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheHG" << std::endl;
 					}
@@ -168,6 +185,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(1);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheHD" << std::endl;
 					}
@@ -176,6 +194,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(9);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheGM" << std::endl;
 					}
@@ -183,6 +202,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(10);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheGH" << std::endl;
 					}
@@ -190,6 +210,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(8);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheGB" << std::endl;
 					}
@@ -198,6 +219,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(3);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheDM" << std::endl;
 					}
@@ -205,6 +227,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(2);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheDH" << std::endl;
 					}
@@ -212,6 +235,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(4);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheDB" << std::endl;
 					}
@@ -220,6 +244,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(6);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheBM" << std::endl;
 					}
@@ -227,6 +252,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(7);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheBG" << std::endl;
 					}
@@ -234,9 +260,10 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					{
 						tower->at(i)->setCadence(true);
 						tower->at(i)->setRotate(5);
+						tower->at(i)->setFire(true);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheBD" << std::endl;
-					}
+					}				
 				}
 			if (tower->at(i)->getCadence())
 			{
@@ -247,7 +274,11 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					tower->at(i)->setCadence(false);
 				}
 			}
+			if (tower->at(i)->getTimeFire() > 0.5f) {
+				tower->at(i)->setFire(false);
+				tower->at(i)->setTimeFire(0, 0);
 			}
+		}
 }
 
 

@@ -14,12 +14,14 @@
 #include "InputController.h"
 #include "Towers.h"
 #include "DifficultyController.h"
+#include "SoundController.h"
 
 class PlayState : public GameState
 {
 private:
 
-	EventController *Paused;
+	SoundController *m_sound;
+	EventController *Control;
 	MapEngineController Map_one;
 	Life_Controller *Life;
 	Money_Controller *Money;
@@ -32,9 +34,13 @@ private:
 
 	sf::Texture texture_tower;
 
+	sf::Texture texture_life_enemy;
+
 	sf::Texture texture_bouton;
 	sf::Texture texture_fond_bouton;
 
+	sf::Texture texture_map_fond;
+	sf::Sprite sprite_map_fond;
 	sf::Texture texture_map;
 	sf::Sprite sprite;
 
@@ -53,12 +59,10 @@ private:
 	std::vector<Entite*> *tower;
 
 	float time_explosion = 0;
-	float time_apparition = 0;
-	float *cadence_tir;
 
 public:
 
-	PlayState(Game* game);
+	PlayState(Game* game, SoundController *soundfond);
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);

@@ -1,11 +1,16 @@
 #include "Infanterie.h"
 #include <iostream>
 
-Infanterie::Infanterie(sf::Vector2f position, sf::Texture *texture, sf::IntRect intRect):Unites(texture,intRect)
+Infanterie::Infanterie(sf::Vector2f position, sf::Texture *texture, sf::Texture *texture_life, sf::IntRect intRect):Unites(texture, texture_life, intRect)
 {
 	this->sprite.setPosition(position);
-}
+	this->sprite_life.setTexture(*texture_life);
 
+	sprite_life.setTextureRect(sf::IntRect(105, 42+(5*(150+32)), 630, 150));
+	sprite_life.setOrigin(32, 32);
+	sprite_life.scale(0.05, 0.05);
+	sprite_life.setPosition(position.x, position.y - 10);
+}
 
 Infanterie::~Infanterie()
 {

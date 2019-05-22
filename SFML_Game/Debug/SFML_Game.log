@@ -1,3 +1,6 @@
-﻿  Infanterie.cpp
-d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\infanterie.cpp(16): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-  SFML_Game.vcxproj -> D:\Users\UnCreativeDroid\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe
+﻿  PlayState.cpp
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(138): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(143): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(148): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(153): warning C4018: '<' : incompatibilité signed/unsigned
+  SFML_Game.vcxproj -> D:\Users\Nicolas\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe

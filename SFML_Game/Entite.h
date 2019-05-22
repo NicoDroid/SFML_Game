@@ -7,6 +7,8 @@ protected:
 	sf::Vector2f position;
 public:
 	sf::Sprite sprite;
+	sf::Sprite sprite_life;
+	sf::Sprite sprite_fire;
 
 	Entite(sf::Texture *texture, sf::IntRect intRect);
 	~Entite();
@@ -27,6 +29,9 @@ public:
 	virtual bool getCadence() { return false; };
 	virtual void setTimeCadence(float A, float B) {};
 	virtual float getTimeCadence() { return 0; };
+	virtual void setTimeFire(float A, float B) {};
+	virtual float getTimeFire() { return 0; };
+	virtual void setFire(bool fire) {};
 	virtual void setRotate(int rotate) {};
 };
 

@@ -8,7 +8,7 @@
 
 const int level[] =
 {
-	24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,
+	/*24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,
 24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,
 24,24,24,24,24,24,24,86,210,254,254,254,254,254,254,211,86,24,24,24,24,24,24,24,24,24,24,24,24,24,
 24,24,24,24,24,24,24,24,232,84,84,224,224,84,84,230,24,24,24,24,24,24,24,24,24,24,24,24,24,24,
@@ -24,14 +24,33 @@ const int level[] =
 24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,232,178,178,230,24,24,
 24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,232,178,178,230,24,24,
 24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,232,178,178,230,24,24,
-24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,232,178,178,230,24,24
+24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,232,178,178,230,24,24*/
 
+24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,
+114,24,24,24,114,24,24,133,86,86,86,86,86,86,86,86,133,24,157,157,114,114,114,114,24,24,24,24,24,24,
+114,114,24,24,114,24,24,86,210,254,254,254,254,254,254,211,86,157,157,114,157,157,157,157,157,157,157,157,157,24,
+114,24,114,24,114,24,24,86,232,84,84,224,224,84,84,230,86,157,157,114,157,157,157,114,114,157,157,157,157,24,
+114,24,24,114,114,24,24,86,232,84,84,224,224,84,84,230,86,157,157,114,157,157,157,157,114,157,157,157,157,24,
+114,24,24,24,114,24,24,86,232,178,178,207,209,178,178,230,86,24,157,157,114,114,114,114,114,157,157,157,157,24,
+24,24,24,24,24,24,24,86,232,178,178,230,232,178,178,230,86,24,24,24,24,24,24,24,24,24,24,24,24,24,
+24,24,297,86,86,86,86,86,232,178,178,230,232,178,178,230,86,86,86,86,86,86,86,86,86,86,86,86,130,24,
+254,254,254,254,254,254,254,254,255,178,178,230,232,178,178,253,254,254,254,254,254,254,254,254,254,254,254,211,86,24,
+224,224,224,224,224,224,224,224,224,84,84,230,232,84,84,224,224,224,224,224,224,224,224,224,224,84,84,230,86,24,
+224,224,224,224,224,224,224,224,224,84,84,230,232,84,84,224,224,224,224,224,224,224,224,224,224,84,84,230,86,24,
+208,208,208,208,208,208,208,208,208,208,208,234,233,208,208,208,208,208,208,208,208,208,208,208,209,178,178,230,86,24,
+24,24,297,86,86,86,86,86,86,86,86,86,86,86,86,86,86,86,86,86,86,86,86,86,232,178,178,230,86,24,
+24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,86,232,178,178,230,86,24,
+24,24,24,24,24,24,24,245,136,24,24,24,24,24,24,24,24,24,136,245,24,24,24,86,232,178,178,230,86,24,
+24,24,24,24,24,24,24,24,24,24,24,24,245,137,24,24,24,24,24,24,24,137,24,297,232,178,178,230,297,24,
+24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,245,24,24,232,178,178,230,24,24
 };
 
 
-PlayState::PlayState(Game* game)
+PlayState::PlayState(Game* game, SoundController *soundfond)
 {
 	this->game = game;
+	m_sound = soundfond;
+	m_sound->Stop();
 
 	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"))
 	{
@@ -53,6 +72,10 @@ PlayState::PlayState(Game* game)
 	{
 		//handle error
 	}
+	if (!texture_map_fond.loadFromFile("Ressources/Tiled/maps_fond.png"))
+	{
+		//handle error
+	}
 	if (!texture_life.loadFromFile("Ressources/Sheets/sheet_vie.png"))
 	{
 		//handle error
@@ -65,33 +88,41 @@ PlayState::PlayState(Game* game)
 	{
 		// erreur...
 	}
+	if (!texture_life_enemy.loadFromFile("Ressources/Sheets/life_enemis.png"))
+	{
+		// erreur...
+	}
 
 	Temp_mouse = new bool(false);
 	Temp_tower = new int(0);
-	cadence_tir = new float(0);
 
 	tower = new vector<Entite*>;
 	avion = new vector<Entite*>;
 	avion2 = new vector<Entite*>;
 	anime_destruction = new vector<sf::Sprite>;
 	
-	Paused = new EventController('p', &font, &fond_pause);
+	Control = new EventController('p', &font, &fond_pause);
 
 	Input = new InputController(&texture_map, &texture_fond_bouton, &texture_bouton, sf::Vector2f(20,888), sf::Vector2f(84,952), sf::Vector2f(148,952),2,5);
 
+	sprite_map_fond.setTexture(texture_map_fond);
 	Map_one.load(texture_map, sf::Vector2u(64, 64), level, 30, 17);	
 
 	Life = new Life_Controller(&texture_life);
 	Money = new Money_Controller(&texture_map);
 
-	sprite.setTexture(texture_explosion);
-	sprite.setTextureRect(sf::IntRect(289, 33, 70, 70));
+	
+
+	sprite.setTexture(texture_map);
+	sprite.setTextureRect(sf::IntRect(19*64, 770, 64, 64)); //20
 	sprite.setOrigin(32, 32);
 	sprite.setPosition(50,50);
+	//sprite.scale(0.05, 0.05);
 }
 
 void PlayState::draw(const float dt)
 {
+	game->window.draw(sprite_map_fond);
 	game->window.draw(Map_one);
 	game->window.draw(Money->sprite_dollar);
 	game->window.draw(Money->sprite_deci);
@@ -107,14 +138,17 @@ void PlayState::draw(const float dt)
 	for (int i = 0; i < tower->size(); i++)
 	{
 		game->window.draw(tower->at(i)->sprite);
+		game->window.draw(tower->at(i)->sprite_fire);
 	}
 	for (int i = 0; i < avion->size(); i++)
 	{
 		game->window.draw(avion->at(i)->sprite);
+		game->window.draw(avion->at(i)->sprite_life);
 	}
 	for (int i = 0; i < avion2->size(); i++)
 	{
 		game->window.draw(avion2->at(i)->sprite);
+		game->window.draw(avion2->at(i)->sprite_life);
 	}
 	for (int i = 0; i < anime_destruction->size(); i++)
 	{
@@ -125,25 +159,33 @@ void PlayState::draw(const float dt)
 			time_explosion = 0;
 		}
 	}
-	if (Paused->Paused())
+	if (Control->Paused())
 	{
-		game->window.draw(Paused->back_pause);
-		game->window.draw(Paused->text_pause);
+		game->window.draw(Control->back__pause_gameover);
+		game->window.draw(Control->text_pause);
+	}
+	if (Control->GameOver())
+	{
+		game->window.draw(Control->back__pause_gameover);
+		game->window.draw(Control->text_game_over);
 	}
 	//game->window.draw(sprite);
 }
 
 void PlayState::update(const float dt)
 {
-	if (Paused->Paused())
+	if (Control->Paused() || Control->GameOver())
 	{
 		clock.restart();
 		clock2.restart();
 	}
-	else
+	else if (Life->getLife()==0)
 	{
-		EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, sf::Vector2f(0, 672), DifficultyController::setDifficulty(&clock3), &texture_explosion, anime_destruction);
-		EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map,sf::Vector2f(0, 604), DifficultyController::setDifficulty(&clock3)+1.0f, &texture_explosion, anime_destruction);
+		Control->GameOver(true);
+	}else
+	{
+		EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, &texture_life_enemy, sf::Vector2f(0, 672), DifficultyController::setDifficulty(&clock3), &texture_explosion, anime_destruction);
+		EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map, &texture_life_enemy, sf::Vector2f(0, 604), DifficultyController::setDifficulty(&clock3)+0.5f, &texture_explosion, anime_destruction);
 		EventController::Detection_enemi(avion, tower, &texture_explosion, anime_destruction, dt);
 		EventController::Detection_enemi(avion2, tower, &texture_explosion, anime_destruction, dt);
 	}
@@ -160,15 +202,15 @@ void PlayState::handleInput()
 			this->game->window.close();
 			break;
 		case sf::Event::MouseButtonPressed:
-			if (event.mouseButton.button == sf::Mouse::Left && !Paused->Paused())
+			if (event.mouseButton.button == sf::Mouse::Left && !Control->Paused() && !Control->GameOver())
 			{
-				sf::Vector2i localPosition = sf::Mouse::getPosition(game->window);
+				sf::Vector2i localPosition = sf::Mouse::getPosition();
 				std::cout << "x: " << localPosition.x << endl;
 				std::cout << "y: " << localPosition.y << endl;
 				
 				if (*Temp_mouse == true)
 				{
-					EventController::MouseCreateTower(&texture_tower, localPosition, tower, Temp_mouse, Temp_tower, Money);
+					EventController::MouseCreateTower(&texture_tower, &texture_map, localPosition, tower, Temp_mouse, Temp_tower, Money);
 				}
 				else
 				{
@@ -177,21 +219,25 @@ void PlayState::handleInput()
 			}
 
 		case sf::Event::KeyPressed:
-			if (event.key.code == sf::Keyboard::P)
-				Paused->Paused(!Paused->Paused());
-			else if (event.key.code == sf::Keyboard::M && !Paused->Paused())
+			if (event.key.code == sf::Keyboard::P && !Control->GameOver())
+				Control->Paused(!Control->Paused());
+			else if (event.key.code == sf::Keyboard::M && !Control->Paused() && !Control->GameOver())
 			{
 				EventController::Heal_Full('h', Life);
 			}
-			else if (event.key.code == sf::Keyboard::E && !Paused->Paused())
+			else if (event.key.code == sf::Keyboard::O && !Control->Paused() && !Control->GameOver())
 			{
-				Money->decrement(1);
+				Money->increment(5);
 			}
-			else if (event.key.code == sf::Keyboard::L && !Paused->Paused())
+			else if (event.key.code == sf::Keyboard::L && !Control->Paused() && !Control->GameOver())
 			{
 				EventController::Nuclear_Destruction('n', avion, Money, &texture_map, &texture_explosion, anime_destruction);
 				EventController::Nuclear_Destruction('n', avion2, Money, &texture_map, &texture_explosion, anime_destruction);
 				std::cout << Money->getMoney() << endl;
+			}
+			else if (event.key.code == sf::Keyboard::Escape)
+			{
+				game->pushState(new MenuState(game, m_sound));
 			}
 		}
 	}
@@ -200,7 +246,7 @@ void PlayState::handleInput()
 
 
 /*
-	iif (event.key.code == sf::Keyboard::Right)
+	if (event.key.code == sf::Keyboard::Right)
 			{
 				sprite.move(5, 0);
 

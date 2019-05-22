@@ -13,10 +13,12 @@ MenuState::MenuState(Game* game, SoundController* soundfond)
 	this->game = game;
 
 	m_sound = soundfond;
+	m_sound->Play();
 
 	float width = game->window.getSize().x;
 	float height = game->window.getSize().y;
-
+	//std::cout << "x: " << game->window.getSize().x << std::endl;
+	//std::cout << "y: " << game->window.getSize().y << std::endl;
 	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"))
 	{
 		//handle error
@@ -25,16 +27,22 @@ MenuState::MenuState(Game* game, SoundController* soundfond)
 	text[0].setFont(font);
 	text[0].setFillColor(sf::Color::Red);
 	text[0].setString("Play");
+	text[0].setCharacterSize(40);
+	text[0].setOrigin(20,20);
 	text[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 1));
 
 	text[1].setFont(font);
 	text[1].setFillColor(sf::Color::White);
 	text[1].setString("Options");
+	text[0].setCharacterSize(40);
+	text[1].setOrigin(20, 20);
 	text[1].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 2));
 
 	text[2].setFont(font);
 	text[2].setFillColor(sf::Color::White);
 	text[2].setString("Exit");
+	text[0].setCharacterSize(40);
+	text[2].setOrigin(20, 20);
 	text[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 3));
 }
 
@@ -88,7 +96,7 @@ void MenuState::draw(const float dt)
 
 void MenuState::loadgame()
 {
-	game->pushState(new PlayState(game));
+	game->pushState(new PlayState(game, m_sound));
 	m_sound->Stop();
 }
 
