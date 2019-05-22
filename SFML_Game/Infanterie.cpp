@@ -83,12 +83,12 @@ void Infanterie::road()
 		this->rotation(-90);
 		this->setMouvement(6);
 	}
-	else if (this->getPosition().x == 1700 && this->getPosition().y == 604)
+	else if (this->getPosition().x == 1696 && this->getPosition().y == 604)
 	{
 		this->rotation(90);
 		this->setMouvement(2);
 	}
-	else if (this->getPosition().x == 1700 && this->getPosition().y == 1016)
+	else if (this->getPosition().x == 1696 && this->getPosition().y == 1016)
 	{
 		this->setMouvement(-1);
 		std::cout << "Game Over" << std::endl;

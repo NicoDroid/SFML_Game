@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DifficultyController.cpp" />
     <ClCompile Include="Entite.cpp" />
     <ClCompile Include="Entite_mobile.cpp" />
     <ClCompile Include="Entite_statique.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="Unites.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DifficultyController.h" />
     <ClInclude Include="Entite.h" />
     <ClInclude Include="Entite_mobile.h" />
     <ClInclude Include="Entite_statique.h" />

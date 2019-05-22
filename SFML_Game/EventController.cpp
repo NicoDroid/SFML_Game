@@ -90,9 +90,14 @@ void EventController::Nuclear_Destruction(char n, std::vector<Entite*> *entite, 
 {
 	for (int i = 0; i < entite->size(); i++)
 	{
-		entite->at(i)->decrementLifeEntite(5);
+		entite->at(i)->decrementLifeEntite(6);
 	}
 	EventController::EventDestroyEntite(entite, texture_explosion, sprite_destruction, money);
+}
+
+void EventController::Heal_Full(char h, Life_Controller *life)
+{
+	life->setFullLife();
 }
 
 void EventController::MouseChoiceTower(sf::Vector2i localPosition, InputController *input, bool *Temp_mouse, int *Temp_tower)
@@ -137,7 +142,7 @@ void EventController::MouseCreateTower(sf::Texture *texture, sf::Vector2i localP
 	}
 }
 
-void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<Entite*> *tower, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction, float *Cadence_Tir)
+void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<Entite*> *tower, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction, float dt)
 {
 		for (int i = 0; i < tower->size(); i++)
 		{
@@ -146,19 +151,23 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					//Haut
 					if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y - 128 && !tower->at(i)->getCadence())
 					{
+						
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(0);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheHM" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x - 64 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y - 128 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(11);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheHG" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x + 64 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y - 128 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(1);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheHD" << std::endl;
 					}
@@ -166,18 +175,21 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x - 128 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(9);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheGM" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x - 128 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y - 64 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(10);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheGH" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x - 128 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y + 64 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(8);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheGB" << std::endl;
 					}
@@ -185,18 +197,21 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x + 124 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(3);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheDM" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x + 124 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y - 64 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(2);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheDH" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x + 124 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y + 64 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(4);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheDB" << std::endl;
 					}
@@ -204,33 +219,38 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y + 124 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(6);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheBM" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x - 64 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y + 124 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(7);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheBG" << std::endl;
 					}
 					else if (enemi->at(j)->getPosition().x == tower->at(i)->getPosition().x + 64 && enemi->at(j)->getPosition().y == tower->at(i)->getPosition().y + 124 && !tower->at(i)->getCadence())
 					{
 						tower->at(i)->setCadence(true);
+						tower->at(i)->setRotate(5);
 						enemi->at(j)->decrementLifeEntite(tower->at(i)->getDegat());
 						std::cout << "ToucheBD" << std::endl;
 					}
-					
-					if (tower->at(i)->getCadence())
-					{
-						if (*Cadence_Tir > 0.5f)
-						{
-							tower->at(i)->setCadence(false);
-							*Cadence_Tir = 0;
-						}
-					}
+				}
+			if (tower->at(i)->getCadence())
+			{
+				tower->at(i)->setTimeCadence(tower->at(i)->getTimeCadence(), dt);
+				if (tower->at(i)->getTimeCadence() > 1.0f)
+				{
+					tower->at(i)->setTimeCadence(0.0f, 0.0f);
+					tower->at(i)->setCadence(false);
 				}
 			}
+			}
 }
+
+
 
 
 

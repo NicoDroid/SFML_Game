@@ -142,12 +142,10 @@ void PlayState::update(const float dt)
 	}
 	else
 	{
-
-			//EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, sf::Vector2f(0, 672), 5.0f, &texture_explosion, anime_destruction);
-			EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map,sf::Vector2f(0, 604), 5.0f, &texture_explosion, anime_destruction);
-			//EventController::Detection_enemi(avion, tower, &texture_explosion, anime_destruction, cadence_tir);
-			EventController::Detection_enemi(avion2, tower, &texture_explosion, anime_destruction, cadence_tir);	
-			*cadence_tir += dt;
+		EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, sf::Vector2f(0, 672), DifficultyController::setDifficulty(&clock3), &texture_explosion, anime_destruction);
+		EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map,sf::Vector2f(0, 604), DifficultyController::setDifficulty(&clock3)+1.0f, &texture_explosion, anime_destruction);
+		EventController::Detection_enemi(avion, tower, &texture_explosion, anime_destruction, dt);
+		EventController::Detection_enemi(avion2, tower, &texture_explosion, anime_destruction, dt);
 	}
 }
 void PlayState::handleInput()
@@ -162,7 +160,7 @@ void PlayState::handleInput()
 			this->game->window.close();
 			break;
 		case sf::Event::MouseButtonPressed:
-			if (event.mouseButton.button == sf::Mouse::Left)
+			if (event.mouseButton.button == sf::Mouse::Left && !Paused->Paused())
 			{
 				sf::Vector2i localPosition = sf::Mouse::getPosition(game->window);
 				std::cout << "x: " << localPosition.x << endl;
@@ -181,9 +179,9 @@ void PlayState::handleInput()
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::P)
 				Paused->Paused(!Paused->Paused());
-			else if (event.key.code == sf::Keyboard::Z && !Paused->Paused())
+			else if (event.key.code == sf::Keyboard::M && !Paused->Paused())
 			{
-				Money->increment(1);
+				EventController::Heal_Full('h', Life);
 			}
 			else if (event.key.code == sf::Keyboard::E && !Paused->Paused())
 			{

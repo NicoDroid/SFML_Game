@@ -25,5 +25,8 @@ public:
 	virtual int getDegat() { return 0; };
 	virtual void setCadence(bool cadence) {};
 	virtual bool getCadence() { return false; };
+	virtual void setTimeCadence(float A, float B) {};
+	virtual float getTimeCadence() { return 0; };
+	virtual void setRotate(int rotate) {};
 };
 

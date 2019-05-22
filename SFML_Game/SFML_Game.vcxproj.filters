@@ -99,6 +99,9 @@
     <ClCompile Include="Towers.cpp">
       <Filter>Fichiers sources\Entite\Statique</Filter>
     </ClCompile>
+    <ClCompile Include="DifficultyController.cpp">
+      <Filter>Fichiers sources\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundController.h">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="Towers.h">
       <Filter>Fichiers d%27en-tête\Entite\Statique</Filter>
+    </ClInclude>
+    <ClInclude Include="DifficultyController.h">
+      <Filter>Fichiers d%27en-tête\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

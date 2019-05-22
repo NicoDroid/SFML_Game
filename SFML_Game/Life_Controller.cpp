@@ -19,6 +19,22 @@ Life_Controller::~Life_Controller()
 {
 }
 
+void Life_Controller::setFullLife()
+{
+	int life = this->life_point;
+	int nolife = 12 - this->life_point;
+
+	if (this->life_point != 0)
+	{
+		this->life_point += nolife;
+
+		rec.left = 0;
+		rec.top = 0;
+
+		this->sprite.setTextureRect(rec);
+	}
+}
+
 void Life_Controller::decrementLife()
 {
 	if (life_point != 0)

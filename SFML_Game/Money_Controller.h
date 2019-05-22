@@ -9,7 +9,7 @@ private:
 	sf::IntRect rec_deci;
 	sf::IntRect rec_uni;
 
-	int money = 5;
+	int money = 50;
 
 	void gestion_affiche(int money_deci, int money_uni);
 public:

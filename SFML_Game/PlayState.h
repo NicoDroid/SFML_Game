@@ -13,7 +13,7 @@
 #include "EventController.h"
 #include "InputController.h"
 #include "Towers.h"
-
+#include "DifficultyController.h"
 
 class PlayState : public GameState
 {
@@ -45,6 +45,7 @@ private:
 
 	sf::Clock clock;
 	sf::Clock clock2;
+	sf::Clock clock3;
 
 	std::vector<Entite*> *avion;
 	std::vector<Entite*> *avion2;

@@ -14,5 +14,6 @@ public:
 
 	void decrementLife();
 	int getLife();
+	void setFullLife();
 };
 
