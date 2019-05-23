@@ -1,10 +1,16 @@
 #include "SFML/Graphics.hpp"
 #include "Game.h"
 #include "GameState.h"
+#include "FileController.h"
+#include <vector>
 
 Game::Game()
 {
-	window.create(sf::VideoMode(1920, 1080), "Best Game Forever", sf::Style::Fullscreen);
+	std::vector<int>Config = FileController::RecupFileOption();
+	int SizeX = Config[2];
+	int SizeY = Config[3];
+
+	window.create(sf::VideoMode(SizeX, SizeY), "HEHDefender");
 	window.setFramerateLimit(60);
 }
 

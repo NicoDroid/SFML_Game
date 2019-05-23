@@ -1,5 +1,6 @@
 #include "EventController.h"
 #include <iostream>
+#include "Game.h"
 
 
 EventController::EventController()
@@ -115,15 +116,19 @@ void EventController::Heal_Full(char h, Life_Controller *life)
 	life->setFullLife();
 }
 
-void EventController::MouseChoiceTower(sf::Vector2i localPosition, InputController *input, bool *Temp_mouse, int *Temp_tower)
+void EventController::MouseChoiceTower(sf::Vector2i localPosition, InputController *input, bool *Temp_mouse, int *Temp_tower, Game *game)
 {
-	if ((localPosition.x >= input->sprite[0].getPosition().x && localPosition.x <= input->sprite[0].getPosition().x + 64) && (localPosition.y >= input->sprite[0].getPosition().y && localPosition.y <= input->sprite[0].getPosition().y + 64))
+	float witdh = 1920.0/(game->window.getSize().x);
+	float height = 1080.0/(game->window.getSize().y);
+
+	if ((localPosition.x*witdh >= input->sprite[0].getPosition().x && localPosition.x*witdh <= input->sprite[0].getPosition().x + 64) && (localPosition.y*height >= input->sprite[0].getPosition().y && localPosition.y*height <= input->sprite[0].getPosition().y + 64))
 	{
 		std::cout << "Dedans1" << std::endl;
+		
 		*Temp_mouse = true;
 		*Temp_tower = 0;
 
-	}else if ((localPosition.x >= input->sprite[1].getPosition().x && localPosition.x <= input->sprite[1].getPosition().x + 64) && (localPosition.y >= input->sprite[1].getPosition().y && localPosition.y <= input->sprite[1].getPosition().y + 64))
+	}else if ((localPosition.x*witdh >= input->sprite[1].getPosition().x && localPosition.x*witdh <= input->sprite[1].getPosition().x + 64) && (localPosition.y*height >= input->sprite[1].getPosition().y && localPosition.y*height <= input->sprite[1].getPosition().y + 64))
 	{
 		std::cout << "Dedans2" << std::endl;
 		*Temp_mouse = true;
@@ -131,13 +136,22 @@ void EventController::MouseChoiceTower(sf::Vector2i localPosition, InputControll
 	}
 }
 
-void EventController::MouseCreateTower(sf::Texture *texture, sf::Texture *texture_feu, sf::Vector2i localPosition, std::vector<Entite*> *entite , bool *Temp_mouse, int *Temp_tower, Money_Controller *money)
+void EventController::MouseCreateTower(sf::Texture *texture, sf::Texture *texture_feu, sf::Vector2i localPosition, std::vector<Entite*> *entite , bool *Temp_mouse, int *Temp_tower, Money_Controller *money, Game *game)
 {
+	float witdh = 1920.0 / (game->window.getSize().x);
+	float height = 1080.0 / (game->window.getSize().y);
+
+	int localposition_x = localPosition.x*witdh;
+	int localposition_y = localPosition.y*height;
+
 	if (*Temp_tower == 0 && money->getMoney()>=2)
 	{
+		/// int x = ((localPosition.x / 64) * 64)*witdh;
 		money->decrement(2);
-		int x = (localPosition.x / 64) * 64;
-		int y = (localPosition.y / 64) * 64;
+		
+		int x = ((localposition_x / 64) * 64);
+		int y = ((localposition_y/ 64) * 64);
+		
 		std::cout << "Pose1" << std::endl;
 		*Temp_mouse = false;
 		entite->push_back(new Towers(texture, texture_feu, 19, sf::IntRect(0, 0, 64, 64), 2, 1, sf::Vector2f((float)x + 32, (float)y + 32)));
@@ -145,8 +159,10 @@ void EventController::MouseCreateTower(sf::Texture *texture, sf::Texture *textur
 	else if(*Temp_tower == 1 && money->getMoney() >= 5)
 	{
 		money->decrement(5);
-		int x = (localPosition.x / 64) * 64;
-		int y = (localPosition.y / 64) * 64;
+
+		int x = ((localposition_x / 64) * 64);
+		int y = ((localposition_y / 64) * 64);
+
 		std::cout << "Pose2" << std::endl;
 		*Temp_mouse = false;
 		entite->push_back(new Towers(texture, texture_feu, 20, sf::IntRect(64, 0, 64,64), 5, 2, sf::Vector2f((float)x + 32, (float)y + 32)));
@@ -274,7 +290,7 @@ void EventController::Detection_enemi(std::vector<Entite*> *enemi, std::vector<E
 					tower->at(i)->setCadence(false);
 				}
 			}
-			if (tower->at(i)->getTimeFire() > 0.5f) {
+			if (tower->at(i)->getTimeFire() > 1.0f) {
 				tower->at(i)->setFire(false);
 				tower->at(i)->setTimeFire(0, 0);
 			}

@@ -12,6 +12,24 @@ MenuState::MenuState(Game* game, SoundController* soundfond)
 
 	this->game = game;
 
+	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"));
+	if (!texture_titre.loadFromFile("Ressources/Sheets/titre.png"))
+	{
+		//handle error
+	}
+	if (!texture.loadFromFile("Ressources/Sheets/sample.png"))
+	{
+		// erreur...
+	}
+
+	sprite.setTexture(texture);
+	sprite.scale(sf::Vector2f(2.5, 2.5));
+	sprite_titre.setTexture(texture_titre);
+	sprite_titre.setPosition(sf::Vector2f(1920/2, 1080/2));
+
+	view.reset(sf::FloatRect(0, 0, 1920, 1080));
+	game->window.setView(view);
+
 	m_sound = soundfond;
 	m_sound->Play();
 
@@ -19,31 +37,27 @@ MenuState::MenuState(Game* game, SoundController* soundfond)
 	float height = game->window.getSize().y;
 	//std::cout << "x: " << game->window.getSize().x << std::endl;
 	//std::cout << "y: " << game->window.getSize().y << std::endl;
-	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"))
-	{
-		//handle error
-	}
-
+	
 	text[0].setFont(font);
 	text[0].setFillColor(sf::Color::Red);
 	text[0].setString("Play");
 	text[0].setCharacterSize(40);
 	text[0].setOrigin(20,20);
-	text[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 1));
+	text[0].setPosition(sf::Vector2f(1920 / 2, 1080 / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 1));
 
 	text[1].setFont(font);
 	text[1].setFillColor(sf::Color::White);
 	text[1].setString("Options");
-	text[0].setCharacterSize(40);
+	text[1].setCharacterSize(40);
 	text[1].setOrigin(20, 20);
-	text[1].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 2));
+	text[1].setPosition(sf::Vector2f(1920/ 2, 1080 / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 2));
 
 	text[2].setFont(font);
 	text[2].setFillColor(sf::Color::White);
 	text[2].setString("Exit");
-	text[0].setCharacterSize(40);
+	text[2].setCharacterSize(40);
 	text[2].setOrigin(20, 20);
-	text[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 3));
+	text[2].setPosition(sf::Vector2f(1920/ 2, 1080 / (MAX_NUMBER_OF_ITEMS_MENU + 1) * 3));
 }
 
 void MenuState::handleInput()
@@ -88,6 +102,8 @@ void MenuState::update(const float dt)
 
 void MenuState::draw(const float dt)
 {
+	game->window.draw(sprite);
+	game->window.draw(sprite_titre);
 	for (int i = 0; i < MAX_NUMBER_OF_ITEMS_MENU; i++)
 	{
 		game->window.draw(text[i]);

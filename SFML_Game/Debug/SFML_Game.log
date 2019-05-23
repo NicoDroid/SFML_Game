@@ -1,6 +1,3 @@
-﻿  PlayState.cpp
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(138): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(143): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(148): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\nicolas\documents\github\sfml_game\sfml_game\playstate.cpp(153): warning C4018: '<' : incompatibilité signed/unsigned
-  SFML_Game.vcxproj -> D:\Users\Nicolas\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe
+﻿  DifficultyController.cpp
+d:\users\uncreativedroid\documents\github\sfml_game\sfml_game\difficultycontroller.cpp(68): warning C4715: 'DifficultyController::setDifficulty' : les chemins de contrôle ne retournent pas tous une valeur
+  SFML_Game.vcxproj -> D:\Users\UnCreativeDroid\Documents\GitHub\SFML_Game\SFML_Game\Debug\SFML_Game.exe

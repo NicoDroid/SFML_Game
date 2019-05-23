@@ -7,7 +7,8 @@ protected:
 	int life = 6;
 	
 public:
-	
+	sf::Vector2f position;
+
 	Unites(sf::Texture *texture, sf::Texture *texture_life, sf::IntRect intRect);
 	~Unites();
 

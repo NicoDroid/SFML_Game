@@ -7,6 +7,6 @@ public:
 	DifficultyController();
 	~DifficultyController();
 
-	static float setDifficulty(sf::Clock *clock);
+	static float setDifficulty(float *clock);
 };
 

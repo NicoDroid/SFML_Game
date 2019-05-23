@@ -19,6 +19,7 @@
 class PlayState : public GameState
 {
 private:
+	sf::View view;
 
 	SoundController *m_sound;
 	EventController *Control;
@@ -51,7 +52,7 @@ private:
 
 	sf::Clock clock;
 	sf::Clock clock2;
-	sf::Clock clock3;
+	float clock3_temp=0;
 
 	std::vector<Entite*> *avion;
 	std::vector<Entite*> *avion2;

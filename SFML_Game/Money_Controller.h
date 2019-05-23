@@ -6,14 +6,16 @@ class Money_Controller
 {
 private:
 	sf::IntRect rec_dollar;
+	sf::IntRect rec_centi;
 	sf::IntRect rec_deci;
 	sf::IntRect rec_uni;
 
-	int money = 50;
+	int money = 5;
 
-	void gestion_affiche(int money_deci, int money_uni);
+	void gestion_affiche(int money_centi, int money_deci, int money_uni);
 public:
 	sf::Sprite sprite_dollar;
+	sf::Sprite sprite_centi;
 	sf::Sprite sprite_deci;
 	sf::Sprite sprite_uni;
 

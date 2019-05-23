@@ -17,6 +17,13 @@ private:
 	void loadgame();
 	void loadoptions();
 
+	sf::View view;
+
+	sf::Texture texture;
+	sf::Sprite sprite;
+	sf::Texture texture_titre;
+	sf::Sprite sprite_titre;
+
 	int selectedItemIndex = 0;
 	sf::Font font;
 	sf::Text text[MAX_NUMBER_OF_ITEMS_MENU];

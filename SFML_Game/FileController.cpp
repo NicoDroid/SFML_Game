@@ -20,7 +20,7 @@ std::vector<int> FileController::RecupFileOption()
 	fopen_s(&m_file, "OptionsParam.ini", "r");
 
 	//Récupère toute les valeurs dans l'ordre (Actuellement: VolumeMenu et VolumeGame)
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		fscanf_s(m_file, "%*s %d", &valeur);
 		tabvaleurs.push_back(valeur);
@@ -36,10 +36,10 @@ void FileController::SetFileOption(int VolumeMenu, int VolumeGame)
 	FILE *m_file;
 	fopen_s(&m_file, "OptionsParam.ini", "w");
 
-	std::string chemin[] = { "VolumeMenu " ,"VolumeGame " };
-	int param[] = { VolumeMenu,VolumeGame };
+	std::string chemin[] = { "VolumeMenu " ,"VolumeGame ", "SizeX ","SizeY " };
+	int param[] = { VolumeMenu,VolumeGame, 1920, 1080 };
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		chemin[i] += std::to_string(param[i]);
 

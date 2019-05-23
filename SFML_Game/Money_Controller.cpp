@@ -15,6 +15,17 @@ Money_Controller::Money_Controller(sf::Texture *texture)
 		sprite_dollar.setTextureRect(rec_dollar);
 		sprite_dollar.setPosition(sf::Vector2f(10, 10));
 
+		//Signe centaine
+		sprite_centi.setTexture(*texture);
+
+		rec_centi.left = 0;
+		rec_centi.top = 770;
+		rec_centi.width = 64;
+		rec_centi.height = 64;
+
+		sprite_centi.setTextureRect(rec_centi);
+		sprite_centi.setPosition(sf::Vector2f(50, 10));
+
 		//Signe decimal
 		sprite_deci.setTexture(*texture);
 
@@ -24,7 +35,7 @@ Money_Controller::Money_Controller(sf::Texture *texture)
 		rec_deci.height = 64;
 
 		sprite_deci.setTextureRect(rec_deci);
-		sprite_deci.setPosition(sf::Vector2f(50, 10));
+		sprite_deci.setPosition(sf::Vector2f(75, 10));
 
 		//Signe unitaire
 		sprite_uni.setTexture(*texture);
@@ -35,12 +46,13 @@ Money_Controller::Money_Controller(sf::Texture *texture)
 		rec_uni.height = 64;
 
 		sprite_uni.setTextureRect(rec_uni);
-		sprite_uni.setPosition(sf::Vector2f(75, 10));
+		sprite_uni.setPosition(sf::Vector2f(100, 10));
 
-		int money_deci = money / 10;
+		int money_centi = money / 100;
+		int money_deci = (money % 100) / 10;
 		int money_uni = money % 10;
 
-		gestion_affiche(money_deci, money_uni);
+		gestion_affiche(money_centi, money_deci, money_uni);
 }
 
 Money_Controller::~Money_Controller()
@@ -49,14 +61,23 @@ Money_Controller::~Money_Controller()
 
 void Money_Controller::increment(int valeur)
 {
-	if (money <95)
+	if (money < 999)
 	{
-		money+=valeur;
+		int temp = 999 - money;
+		if (valeur > temp)
+		{
+			money += temp;
+		}
+		else
+		{
+			money += valeur;
+		}
 
-		int money_deci = money / 10;
+		int money_centi = money / 100;
+		int money_deci = (money % 100) / 10;
 		int money_uni = money % 10;
 
-		gestion_affiche(money_deci, money_uni);
+		gestion_affiche(money_centi, money_deci, money_uni);
 	}
 }
 
@@ -66,10 +87,11 @@ void Money_Controller::decrement(int valeur)
 	{
 		money-=valeur;
 
-		int money_deci = money / 10;
+		int money_centi = money / 100;
+		int money_deci = (money % 100) / 10;
 		int money_uni = money % 10;
 
-		gestion_affiche(money_deci, money_uni);
+		gestion_affiche(money_centi, money_deci, money_uni);
 	}
 }
 
@@ -78,8 +100,54 @@ int Money_Controller::getMoney()
 	return money;
 }
 
-void Money_Controller::gestion_affiche(int money_deci, int money_uni)
+void Money_Controller::gestion_affiche(int money_centi, int money_deci, int money_uni)
 {
+	switch (money_centi)
+	{
+	case 0:
+		rec_centi.left = 0;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 1:
+		rec_centi.left = 64;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 2:
+		rec_centi.left = 128;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 3:
+		rec_centi.left = 192;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 4:
+		rec_centi.left = 256;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 5:
+		rec_centi.left = 320;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 6:
+		rec_centi.left = 384;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 7:
+		rec_centi.left = 448;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 8:
+		rec_centi.left = 512;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	case 9:
+		rec_centi.left = 576;
+		sprite_centi.setTextureRect(rec_centi);
+		break;
+	default:
+		break;
+	}
+
 	switch (money_deci)
 	{
 	case 0:

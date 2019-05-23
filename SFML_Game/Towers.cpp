@@ -6,8 +6,16 @@ Towers::Towers(sf::Texture *texture, sf::Texture *texturefeu, int feu, sf::IntRe
 	this->degat = degat;
 	this->feu = feu;
 
-	this->sprite.setPosition(position);
-	this->position = position;
+	this->sprite.setPosition(position.x, position.y);
+
+	this->position.x = position.x;
+	this->position.y = position.y;
+
+	/*
+	this->sprite.setPosition(position.x, position.y);
+	this->position.x = position.x;
+	this->position.y = position.y;
+	*/
 
 	this->sprite_fire.setTexture(*texturefeu);
 

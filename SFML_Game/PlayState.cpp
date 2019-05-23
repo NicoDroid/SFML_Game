@@ -52,6 +52,9 @@ PlayState::PlayState(Game* game, SoundController *soundfond)
 	m_sound = soundfond;
 	m_sound->Stop();
 
+	view.reset(sf::FloatRect(0, 0, 1920, 1080));
+	game->window.setView(view);
+
 	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"))
 	{
 		// erreur...
@@ -111,8 +114,6 @@ PlayState::PlayState(Game* game, SoundController *soundfond)
 	Life = new Life_Controller(&texture_life);
 	Money = new Money_Controller(&texture_map);
 
-	
-
 	sprite.setTexture(texture_map);
 	sprite.setTextureRect(sf::IntRect(19*64, 770, 64, 64)); //20
 	sprite.setOrigin(32, 32);
@@ -125,6 +126,7 @@ void PlayState::draw(const float dt)
 	game->window.draw(sprite_map_fond);
 	game->window.draw(Map_one);
 	game->window.draw(Money->sprite_dollar);
+	game->window.draw(Money->sprite_centi);
 	game->window.draw(Money->sprite_deci);
 	game->window.draw(Money->sprite_uni);
 	game->window.draw(Life->sprite);
@@ -184,8 +186,11 @@ void PlayState::update(const float dt)
 		Control->GameOver(true);
 	}else
 	{
-		EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, &texture_life_enemy, sf::Vector2f(0, 672), DifficultyController::setDifficulty(&clock3), &texture_explosion, anime_destruction);
-		EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map, &texture_life_enemy, sf::Vector2f(0, 604), DifficultyController::setDifficulty(&clock3)+0.5f, &texture_explosion, anime_destruction);
+		clock3_temp += dt;
+		
+		std::cout << "Time: " << clock3_temp << endl;
+		EventController::Appariton_Disparition('a', avion, Life, Money, &clock, &texture_map, &texture_life_enemy, sf::Vector2f(0, 672), DifficultyController::setDifficulty(&clock3_temp), &texture_explosion, anime_destruction);
+		EventController::Appariton_Disparition('a', avion2, Life, Money, &clock2, &texture_map, &texture_life_enemy, sf::Vector2f(0, 604), DifficultyController::setDifficulty(&clock3_temp)+0.5f, &texture_explosion, anime_destruction);
 		EventController::Detection_enemi(avion, tower, &texture_explosion, anime_destruction, dt);
 		EventController::Detection_enemi(avion2, tower, &texture_explosion, anime_destruction, dt);
 	}
@@ -204,23 +209,25 @@ void PlayState::handleInput()
 		case sf::Event::MouseButtonPressed:
 			if (event.mouseButton.button == sf::Mouse::Left && !Control->Paused() && !Control->GameOver())
 			{
-				sf::Vector2i localPosition = sf::Mouse::getPosition();
+				sf::Vector2i localPosition = sf::Mouse::getPosition(game->window);
 				std::cout << "x: " << localPosition.x << endl;
 				std::cout << "y: " << localPosition.y << endl;
 				
 				if (*Temp_mouse == true)
 				{
-					EventController::MouseCreateTower(&texture_tower, &texture_map, localPosition, tower, Temp_mouse, Temp_tower, Money);
+					EventController::MouseCreateTower(&texture_tower, &texture_map, localPosition, tower, Temp_mouse, Temp_tower, Money, game);
 				}
 				else
 				{
-					EventController::MouseChoiceTower(localPosition, Input, Temp_mouse, Temp_tower);
+					EventController::MouseChoiceTower(localPosition, Input, Temp_mouse, Temp_tower, game);
 				}
 			}
 
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::P && !Control->GameOver())
-				Control->Paused(!Control->Paused());
+			{
+				Control->Paused(!Control->Paused());			
+			}
 			else if (event.key.code == sf::Keyboard::M && !Control->Paused() && !Control->GameOver())
 			{
 				EventController::Heal_Full('h', Life);

@@ -18,6 +18,11 @@ private:
 	void upSound();
 	void downSound();
 
+	sf::View view;
+
+	sf::Texture texture;
+	sf::Sprite sprite;
+
 	sf::Font font;
 	sf::Text text[MAX_NUMBER_OF_ITEMS_OPTION];
 	int selectedItemIndex = 0;

@@ -10,8 +10,9 @@ Life_Controller::Life_Controller(sf::Texture *texture)
 	rec.height = 480;
 
 	this->sprite.setTextureRect(rec);
+	this->sprite.scale(sf::Vector2f(0.7, 0.7));
 
-	this->sprite.setPosition(sf::Vector2f(1400, -150));
+	this->sprite.setPosition(sf::Vector2f(1550, -80));
 }
 
 
