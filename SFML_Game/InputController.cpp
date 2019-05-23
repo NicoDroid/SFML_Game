@@ -1,6 +1,20 @@
 #include "InputController.h"
 
 
+InputController::InputController(sf::Texture *texture, sf::Vector2f position_A, sf::Vector2f position_B)
+{
+	sf::Sprite spriteNuclear;
+	//spriteNuclear.setTexture(*texture);
+	spriteNuclear.setTextureRect(sf::IntRect(0, 0, 64, 64));
+	spriteNuclear.setPosition(position_A);
+	this->sprite.push_back(spriteNuclear);
+
+	sf::Sprite spriteLife;
+	//spriteLife.setTexture(*texture);
+	spriteLife.setTextureRect(sf::IntRect(0, 0, 64, 64));
+	spriteLife.setPosition(position_B);
+	this->sprite.push_back(spriteLife);
+}
 
 InputController::InputController(sf::Texture *texture_map, sf::Texture *texture_fond, sf::Texture *texture, sf::Vector2f position_fond, sf::Vector2f position_A, sf::Vector2f position_B, int prix_A, int prix_B)
 {

@@ -1,6 +1,8 @@
 #include "EventController.h"
 #include <iostream>
 #include "Game.h"
+#include <string>
+#include <sstream>
 
 
 EventController::EventController()
@@ -18,13 +20,19 @@ EventController::EventController(char p, sf::Font *font, sf::Texture *texture)
 	this->text_pause.setString("PAUSE");
 	this->text_pause.setCharacterSize(40);
 	this->text_pause.setFillColor(sf::Color::White);
-	this->text_pause.setPosition(1720 / 2, 880 / 2);
+	this->text_pause.setPosition(1920 / 2, 1080 / 2);
 
 	this->text_game_over.setFont(*font);
 	this->text_game_over.setString("GAME OVER !");
 	this->text_game_over.setCharacterSize(40);
 	this->text_game_over.setFillColor(sf::Color::White);
-	this->text_game_over.setPosition(1720 / 2, 880 / 2);
+	this->text_game_over.setPosition(1920 / 2, 1080 / 2);
+
+	
+	this->text_cptDead.setFont(*font);
+	this->text_cptDead.setCharacterSize(30);
+	this->text_cptDead.setFillColor(sf::Color::White);
+	this->text_cptDead.setPosition(1920 / 2, 1080 / 2 + 75);
 }
 
 EventController::~EventController()
@@ -68,8 +76,12 @@ void EventController::GameOver(bool gameover)
 {
 	this->gameover = gameover;
 }
-bool EventController::GameOver()
+bool EventController::GameOver(int cptDead)
 {
+	std::stringstream sdead;
+	sdead << "Ennemis tues: " << cptDead;
+	std::string dead = sdead.str();
+	text_cptDead.setString(dead);
 	return this->gameover;
 }
 
@@ -133,6 +145,45 @@ void EventController::MouseChoiceTower(sf::Vector2i localPosition, InputControll
 		std::cout << "Dedans2" << std::endl;
 		*Temp_mouse = true;
 		*Temp_tower = 1;
+	}
+}
+
+void EventController::MouseDestroyTower(sf::Vector2i localPosition, std::vector<Entite*> *entite, Game *game)
+{
+	float witdh = 1920.0 / (game->window.getSize().x);
+	float height = 1080.0 / (game->window.getSize().y);
+
+	for (int i = 0; i < entite->size(); i++)
+	{
+		if ((localPosition.x*witdh >= entite->at(i)->sprite.getPosition().x && localPosition.x*witdh <= entite->at(i)->sprite.getPosition().x + 64) && (localPosition.y*height >= entite->at(i)->sprite.getPosition().y && localPosition.y*height <= entite->at(i)->sprite.getPosition().y + 64))
+		{
+			entite->erase(entite->begin() + i);
+			std::cout << "Delete" << std::endl;
+		}
+	}
+}
+
+void EventController::Power(sf::Vector2i localPosition, InputController *input, Game *game, char n, std::vector<Entite*> *entite, std::vector<Entite*> *entite2, Money_Controller *money, Life_Controller *life, sf::Texture *texture_map, sf::Texture *texture_explosion, std::vector<sf::Sprite> *sprite_destruction, SoundController *soundNuclear, SoundController *soundHeal)
+{
+	float witdh = 1920.0 / (game->window.getSize().x);
+	float height = 1080.0 / (game->window.getSize().y);
+
+	if ((localPosition.x*witdh >= input->sprite[0].getPosition().x && localPosition.x*witdh <= input->sprite[0].getPosition().x + 64) && (localPosition.y*height >= input->sprite[0].getPosition().y && localPosition.y*height <= input->sprite[0].getPosition().y + 64))
+	{
+		soundHeal->Stop();
+		soundHeal->Play();
+
+		EventController::Heal_Full('h', life);
+		std::cout << "Heal" << std::endl;
+	}
+	else if ((localPosition.x*witdh >= input->sprite[1].getPosition().x && localPosition.x*witdh <= input->sprite[1].getPosition().x + 64) && (localPosition.y*height >= input->sprite[1].getPosition().y && localPosition.y*height <= input->sprite[1].getPosition().y + 64))
+	{
+		soundNuclear->Stop();
+		soundNuclear->Play();
+
+		EventController::Nuclear_Destruction('n', entite, money, texture_map, texture_explosion, sprite_destruction);
+		EventController::Nuclear_Destruction('n', entite2, money, texture_map, texture_explosion, sprite_destruction);
+		std::cout << "Nuclear" << std::endl;
 	}
 }
 

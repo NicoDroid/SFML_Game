@@ -11,11 +11,15 @@ int main()
 {
 	Game game;
 
-	SoundController soundfond("speck.ogg", true);
+	SoundController soundfond("roger.ogg", true);
 	soundfond.SetVolume(FileController::RecupFileOption()[0]);
 	soundfond.Play();
 
-	game.pushState(new MenuState(&game, &soundfond));
+	SoundController soundfond2("meydn.ogg", true);
+	soundfond2.SetVolume(FileController::RecupFileOption()[1]);
+	soundfond2.Stop();
+
+	game.pushState(new MenuState(&game, &soundfond, &soundfond2));
 
 	game.gameLoop();
 

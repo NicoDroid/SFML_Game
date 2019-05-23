@@ -6,11 +6,14 @@
 #include "GameState.h"
 #include "PlayState.h"
 #include "OptionState.h"
+#include "FileController.h"
 
-MenuState::MenuState(Game* game, SoundController* soundfond)
+MenuState::MenuState(Game* game, SoundController* soundfond, SoundController* soundfond2)
 {
 
 	this->game = game;
+	game->window.setSize(sf::Vector2u(FileController::RecupFileOption()[2], FileController::RecupFileOption()[3]));
+	game->window.setMouseCursorVisible(false);
 
 	if (!font.loadFromFile("Ressources/Fonts/arial.ttf"));
 	if (!texture_titre.loadFromFile("Ressources/Sheets/titre.png"))
@@ -25,13 +28,16 @@ MenuState::MenuState(Game* game, SoundController* soundfond)
 	sprite.setTexture(texture);
 	sprite.scale(sf::Vector2f(2.5, 2.5));
 	sprite_titre.setTexture(texture_titre);
-	sprite_titre.setPosition(sf::Vector2f(1920/2, 1080/2));
+	sprite_titre.setPosition(sf::Vector2f(250, 150));
+	sprite_titre.scale(sf::Vector2f(1.5, 1.5));
 
 	view.reset(sf::FloatRect(0, 0, 1920, 1080));
 	game->window.setView(view);
 
 	m_sound = soundfond;
+	m_sound2 = soundfond2;
 	m_sound->Play();
+	m_sound2->Stop();
 
 	float width = game->window.getSize().x;
 	float height = game->window.getSize().y;
@@ -112,13 +118,13 @@ void MenuState::draw(const float dt)
 
 void MenuState::loadgame()
 {
-	game->pushState(new PlayState(game, m_sound));
+	game->pushState(new PlayState(game, m_sound, m_sound2));
 	m_sound->Stop();
 }
 
 void MenuState::loadoptions()
 {
-	game->pushState(new OptionState(game, m_sound));
+	game->pushState(new OptionState(game, m_sound, m_sound2));
 }
 
 void MenuState::MoveUp()

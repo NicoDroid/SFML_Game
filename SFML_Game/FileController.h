@@ -17,6 +17,6 @@ public:
 
 
 	static std::vector<int> RecupFileOption();
-	static void SetFileOption(int VolumeMenu, int VolumeGame);
+	static void SetFileOption(int VolumeMenu, int VolumeGame, int scaleX, int scaleY);
 };
 

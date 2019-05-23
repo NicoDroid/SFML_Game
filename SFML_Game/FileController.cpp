@@ -31,13 +31,13 @@ std::vector<int> FileController::RecupFileOption()
 	return tabvaleurs;
 }
 
-void FileController::SetFileOption(int VolumeMenu, int VolumeGame)
+void FileController::SetFileOption(int VolumeMenu, int VolumeGame, int scaleX, int scaleY)
 {
 	FILE *m_file;
 	fopen_s(&m_file, "OptionsParam.ini", "w");
 
 	std::string chemin[] = { "VolumeMenu " ,"VolumeGame ", "SizeX ","SizeY " };
-	int param[] = { VolumeMenu,VolumeGame, 1920, 1080 };
+	int param[] = { VolumeMenu,VolumeGame, scaleX, scaleY };
 
 	for (int i = 0; i < 4; i++)
 	{

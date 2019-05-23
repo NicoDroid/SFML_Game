@@ -16,6 +16,7 @@ public:
 	std::vector<sf::Sprite> sprite_prix;
 
 	InputController(sf::Texture *texture_map, sf::Texture *texture_fond, sf::Texture *texture, sf::Vector2f position_fond, sf::Vector2f position_A, sf::Vector2f position_B, int prix_A, int prix_B);
+	InputController(sf::Texture *texture, sf::Vector2f position_A, sf::Vector2f position_B);
 	~InputController();
 
 	int getTaille();

@@ -10,7 +10,7 @@ Game::Game()
 	int SizeX = Config[2];
 	int SizeY = Config[3];
 
-	window.create(sf::VideoMode(SizeX, SizeY), "HEHDefender");
+	window.create(sf::VideoMode(SizeX, SizeY), "HEHDefender", sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
 }
 

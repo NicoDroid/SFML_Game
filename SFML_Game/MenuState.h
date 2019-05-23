@@ -29,9 +29,10 @@ private:
 	sf::Text text[MAX_NUMBER_OF_ITEMS_MENU];
 
 	SoundController *m_sound;
+	SoundController *m_sound2;
 
 public:
-	MenuState(Game* game, SoundController* soundfond);
+	MenuState(Game* game, SoundController* soundfond, SoundController* soundfond2);
 	~MenuState();
 
 	virtual void draw(const float dt);

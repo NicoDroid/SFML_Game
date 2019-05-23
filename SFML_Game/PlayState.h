@@ -22,14 +22,19 @@ private:
 	sf::View view;
 
 	SoundController *m_sound;
+	SoundController *m_sound2;
+	SoundController *soundNuclear;
+	SoundController *soundHeal;
 	EventController *Control;
 	MapEngineController Map_one;
 	Life_Controller *Life;
 	Money_Controller *Money;
 	InputController *Input;
+	InputController *Input2;
 	
 	bool *Temp_mouse;
 	int *Temp_tower;
+	int cptDead = 0;
 
 	sf::Font font;
 
@@ -63,7 +68,7 @@ private:
 
 public:
 
-	PlayState(Game* game, SoundController *soundfond);
+	PlayState(Game* game, SoundController *soundfond, SoundController *soundfond2);
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
