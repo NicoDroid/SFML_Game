@@ -84,6 +84,7 @@ OptionState::OptionState(Game* game, SoundController* soundfond, SoundController
 OptionState::~OptionState()
 {
 	delete m_sound;
+	delete m_sound2;
 }
 
 void OptionState::handleInput()

@@ -52,7 +52,7 @@ int EventController::EventDestroyEntite(std::vector<Entite*> *entite, sf::Textur
 		}
 		if (entite->at(i)->getLife() <= 0 && entite->at(i)->getMouvement() != -1)
 		{
-			money->increment(5);
+			money->increment(2);
 			EventController::AnimeDestruction(texture_explosion, entite->at(i)->getPosition(), sprite_destruction);
 			delete entite->at(i);
 			entite->erase(entite->begin() + i);
@@ -205,7 +205,7 @@ void EventController::MouseCreateTower(sf::Texture *texture, sf::Texture *textur
 		
 		std::cout << "Pose1" << std::endl;
 		*Temp_mouse = false;
-		entite->push_back(new Towers(texture, texture_feu, 19, sf::IntRect(0, 0, 64, 64), 2, 1, sf::Vector2f((float)x + 32, (float)y + 32)));
+		entite->push_back(new Towers(texture, texture_feu, 19, sf::IntRect(0, 0, 64, 64), 2, 2, sf::Vector2f((float)x + 32, (float)y + 32)));
 	}
 	else if(*Temp_tower == 1 && money->getMoney() >= 5)
 	{
@@ -216,7 +216,7 @@ void EventController::MouseCreateTower(sf::Texture *texture, sf::Texture *textur
 
 		std::cout << "Pose2" << std::endl;
 		*Temp_mouse = false;
-		entite->push_back(new Towers(texture, texture_feu, 20, sf::IntRect(64, 0, 64,64), 5, 2, sf::Vector2f((float)x + 32, (float)y + 32)));
+		entite->push_back(new Towers(texture, texture_feu, 20, sf::IntRect(64, 0, 64,64), 5, 3, sf::Vector2f((float)x + 32, (float)y + 32)));
 	}
 	else
 	{

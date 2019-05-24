@@ -99,6 +99,7 @@ void MenuState::handleInput()
 MenuState::~MenuState()
 {
 	delete m_sound;
+	delete m_sound2;
 }
 
 void MenuState::update(const float dt)

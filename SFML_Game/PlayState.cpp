@@ -124,11 +124,34 @@ PlayState::PlayState(Game* game, SoundController *soundfond, SoundController *so
 	Life = new Life_Controller(&texture_life);
 	Money = new Money_Controller(&texture_map);
 
+	/*
 	sprite.setTexture(texture_map);
 	sprite.setTextureRect(sf::IntRect(19*64, 770, 64, 64)); //20
 	sprite.setOrigin(32, 32);
 	sprite.setPosition(50,50);
-	//sprite.scale(0.05, 0.05);
+	sprite.scale(0.05, 0.05);*/
+}
+
+PlayState::~PlayState()
+{
+	delete m_sound;
+	delete m_sound2;
+
+	delete soundNuclear;
+	delete soundHeal;
+	delete Control;
+    delete Life;
+	delete Money;
+	delete Input;
+	delete Input2;
+
+	delete Temp_mouse;
+	delete Temp_tower;
+
+	delete avion;
+	delete avion2;
+	delete anime_destruction;
+	delete tower;
 }
 
 void PlayState::draw(const float dt)
@@ -187,7 +210,6 @@ void PlayState::draw(const float dt)
 		game->window.draw(Control->text_game_over);
 		game->window.draw(Control->text_cptDead);
 	}
-	std::cout << "Mort: " << cptDead << endl;
 	//game->window.draw(sprite);
 }
 
@@ -226,6 +248,7 @@ void PlayState::handleInput()
 		case sf::Event::MouseButtonPressed:
 			if (event.mouseButton.button == sf::Mouse::Left && !Control->Paused() && !Control->GameOver(cptDead))
 			{
+				std::cout << "Lclick" << std::endl;
 				sf::Vector2i localPosition = sf::Mouse::getPosition(game->window);
 				std::cout << "x: " << localPosition.x << endl;
 				std::cout << "y: " << localPosition.y << endl;
@@ -243,6 +266,7 @@ void PlayState::handleInput()
 			}
 			if (event.mouseButton.button == sf::Mouse::Right && !Control->Paused() && !Control->GameOver(cptDead))
 			{
+				std::cout << "Rclick" << std::endl;
 				sf::Vector2i localPosition = sf::Mouse::getPosition(game->window);
 				std::cout << "x: " << localPosition.x << endl;
 				std::cout << "y: " << localPosition.y << endl;

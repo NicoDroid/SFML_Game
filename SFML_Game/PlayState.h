@@ -69,6 +69,7 @@ private:
 public:
 
 	PlayState(Game* game, SoundController *soundfond, SoundController *soundfond2);
+	~PlayState();
 
 	virtual void draw(const float dt);
 	virtual void update(const float dt);
